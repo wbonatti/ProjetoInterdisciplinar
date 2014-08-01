@@ -1,21 +1,18 @@
 var app = angular.module('app', [
   'ngRoute',
+  'ngCookies',
   'appControllers'
 ]);
 
-
-app.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: 'views/login/login.html',
-        controller: 'loginCtrl'
-      }).
-      when('/principal', {
-        templateUrl: 'views/principal/principal.html',
-        controller: 'loginCtrl'
-      }).
-      otherwise({
-        redirectTo: 'views/404'
-      });
-  }]);
+app.factory('Auth', function($cookieStore){
+return{
+    setUser : function(aUser){
+        aUser.ts = +new Date;
+        $cookieStore.put('intranetusuario',aUser);
+    },
+    isLoggedIn : function(){
+        var user = $cookieStore.get('intranetusuario');
+        return(user)? user : false;
+    }
+  }
+});
