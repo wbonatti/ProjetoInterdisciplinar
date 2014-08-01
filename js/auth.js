@@ -4,8 +4,5 @@ app.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Aut
             event.preventDefault();
             $location.path('/');
         }
-        else {
-            $location.path('/principal');
-        }
     });
 }]);
