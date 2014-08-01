@@ -50,10 +50,45 @@
         <script src="js/controllers/principal/principalcontroller.js"></script>
     </head>
     <body>
-        <div ng-include src="'views/default/header.html'"></div>
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <p class="pull-right visible-xs">
+              <button type="button" class="navbar-toggle" data-toggle="offcanvas">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+              </button>
+          </p>
+          <a class="navbar-brand" href="#">Intranet</a>
+        </div>
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
         
+        <div class="col-xs-12 col-sm-9" ng-view="" ng-animate=" 'animate' "></div>
         
-        <div ng-view="" ng-animate=" 'animate' "></div>
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Alunos</a></li>
+                <li><a href="#">Funcionários</a></li>
+                <li><a href="#">Usuários</a></li>
+                <li><a href="#">Turmas</a></li>
+                <li><a href="#">Disciplinas</a></li>
+                <li><a href="#">Logs</a></li>
+                <li class="btn-primary"><a href="#" ng-click="logout()">Logout</a></li>
+            </ul>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+    </div><!--/.container-->
+       
         <footer>
             <hr>
             <small>&copy; Wellinton David Chyla Perazzoli, 2014</small>
