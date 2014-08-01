@@ -4,7 +4,7 @@ var app = angular.module('app', [
   'appControllers'
 ]);
 
-app.factory('Auth', function($cookieStore){
+app.factory('Auth', function($cookieStore, $location){
 return{
     setUser : function(aUser){
         aUser.ts = +new Date;
@@ -13,6 +13,10 @@ return{
     isLoggedIn : function(){
         var user = $cookieStore.get('intranetusuario');
         return(user)? user : false;
+    },
+    logout: function(){
+        $cookieStore.remove('intranetusuario');
+        $location.path('/');
     }
   }
 });

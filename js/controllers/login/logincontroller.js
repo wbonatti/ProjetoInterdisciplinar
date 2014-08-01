@@ -14,6 +14,7 @@ appControllers.controller('loginCtrl',
                         $location.path("/principal");
                     }
                 });
+                $scope.mensagem = "Usuário não encontrado!";
             });
         };
     });
