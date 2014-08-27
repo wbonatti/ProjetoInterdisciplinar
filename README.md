@@ -1,12 +1,11 @@
-# Laravel and Angular Single Page Comment App
+# Projeto Interdisciplinar IV e V
 
-This is the repository for the [scotch.io tutorial](http://scotch.io/tutorials/php/create-a-laravel-and-angular-single-page-comment-application).
+Este é o projeto que será usado para obtenção da nota de Projeto Interdisciplinar IV e V no Curso Superior de Técnologia em Análise e Desenvolvimento pelo Centro de Ciências Exatas da Universidade Tuiuti do Paraná
 
-## Installation
 
-1. Clone the repo: `git clone git@github.com:scotch-io/laravel-angular-comment-app`
-2. Install Laravel: `composer install --prefer-dist`
-3. Change your database settings in `app/config/database.php`
-4. Migrate your database: `php artisan migrate`
-5. Seed your database: `php artisan db:seed`
-6. View your application in browser.
+## Instalação
+
+1. Clone o repositório: `git clone https://github.com/wellintonperazzoli/ProjetoInterdisciplinar.git`
+2. Configure o seu Apache para que o DocumentRoot seja a pasta /Public do projeto. Se preferir, execute o comando "php artisian serve" dentro da pasta raíz do projeto, isso fará com que ele seja executado com o servidor nativo do php por meio da porta 8000.
+3. Execute os script de criação do banco de dados que se encontram na pasta do projeto.
+4. Veja sua aplicação no navegador
