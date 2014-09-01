@@ -1,43 +1,37 @@
-<!doctype html>
-<html>
-    <head>
-        <title> Painel </title>
-        <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/datepicker.css" rel="stylesheet" type="text/css"/>
-        <script src="/js/default/jquery.min.js" type="text/javascript"></script>
-        <script src="/js/default/bootstrap.min.js" type="text/javascript"></script>
-        <script src="/js/default/bootstrap-datepicker.js" type="text/javascript"></script>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <title>Intranet</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+<link href="/css/pages/signin.css" rel="stylesheet" type="text/css">
+
+</head>
+
 <body>
-    <header class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="row ">
-                <div class="col-xs-4">
-                    <div class="list-group-item list-group-item-danger text-center"><b>Intranet</b></div>
-                </div>
-                <div class="col-xs-4 col-xs-offset-4 pull-right">
-                    <?php if(!empty($usuario)): ?>
-                        Bem vindo <?=$usuario ?>! -  <a href="/logout"> sair! </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </header>
-<?php if(!empty($usuario)): ?>
-        <article class="col-md-10 col-md-offset-1">
-            <div class="navbar navbar-default">
-                <div class="container-fluid">
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="border-right"><a href="/comissoes">Inicio</a></li>
-                        <li class="border-right"><a href="/faturamento">Alunos</a></li>
-                        <li class="border-right"><a href="/registro">Funcionários</a></li>
-                        <li class="border-right"><a href="/dados">Turmas</a></li>
-                        <li class="border-right"><a href="/componentes">Disciplinas</a></li>
-                        <li class="border-right"><a href="/componentes">Logs</a></li>
-                        <li><a href="/componentes">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </article>
-<?php endif; ?>
+	
+	<div class="navbar navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			<a class="brand" href="/">
+				Intranet Login
+			</a>		
+	
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->

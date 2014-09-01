@@ -1,13 +1,8 @@
-    </body>
-    <footer class="navbar navbar-default">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-8">
-                </div>
-                <div class="col-xs-4">
-                    <div class="list-group-item list-group-item-danger text-center"><b>Intranet</b></div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script src="js/signin.js"></script>
+
+</body>
+
 </html>
