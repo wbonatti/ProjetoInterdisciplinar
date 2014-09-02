@@ -29,7 +29,9 @@ textarea {
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 }
-
+.text-danger{
+    color: #b90101;
+}
 .btn-icon-only {
 	padding-right: 3px;
 	padding-left: 3px;
