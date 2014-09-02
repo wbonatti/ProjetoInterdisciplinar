@@ -9,19 +9,17 @@ Class loginController extends \BaseController
     function autenticar()
     {
         $rules = [
-            'usuario' => 'required|email',
-            'senha' => 'required|min:8'
+            'usuario' => 'required',
+            'senha' => 'required'
         ];
-        $messages = array(
-            'required' => 'Você deve preencher o campo :attribute.',
-            'email' => 'O campo :attribute deve ser um email válido.',
-            'min' => 'O campo :attribute deve ter ao menos 8 caracteres.',
-        );
         
-        $validator = Validator::make(Input::all(), $rules,$messages);
-        if (!$validator->fails())
-            if(Autenticacao::efetuaLogin(Input::all()))
+        $validator = Validator::make(Input::all(), $rules);
+        
+        if (!$validator->fails()):
+            if(Autenticacao::efetuaLogin(Input::all())):
                 return Redirect::to('/inicio');
+            endif;
+        endif;
         
         $view = View::make('login::header');
         $view .= View::make('login::login')->withErrors($validator)->withInput(Input::except('senha'));
