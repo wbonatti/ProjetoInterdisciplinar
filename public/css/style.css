@@ -72,7 +72,8 @@ textarea {
 .navbar-inner {
 	padding: 7px 0;
 	
-	background: #00ba8b !important;
+	//background: #00ba8b !important;
+        background: #34495e !important;
 	
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
@@ -108,7 +109,13 @@ textarea {
     color: #666;
 }
 
-.navbar-search .search-query { background:#008866; border:0; color:#fff; line-height:normal;}
+.navbar-search .search-query { 
+    //background:#008866; 
+    background: #ecf0f1;
+    border:0; 
+    color:#fff; 
+    line-height:normal;
+}
 
 
 /*------------------------------------------------------------------
@@ -184,7 +191,8 @@ textarea {
 
 .subnavbar .container > ul > li.active > a {
 	
-	border-bottom:3px solid #ff7f74;
+	//border-bottom:3px solid #ff7f74;
+        border-bottom:3px solid #34495e;
 	color: #383838;
 }
     
@@ -265,7 +273,8 @@ textarea {
 .extra {
 
 	border-top: 1px solid #585858;
-	border-bottom: 1px solid #000;
+	//border-bottom: 1px solid #000;
+        border-bottom: 1px solid #1b2d3f;
 
 }
 
@@ -273,13 +282,14 @@ textarea {
 	padding: 20px 0;
 	
 	font-size: 11px;
-	color: #BBB;
+	color: #DDD;
 	
-	background: #1A1A1A;
+	//background: #1A1A1A;
+        background: #34495e;
 }
 
 .extra a {
-	color: #666;
+	color: #AAA;
 }
 
 .extra h4 {
@@ -309,14 +319,16 @@ textarea {
 .footer {
 	margin-top: 0;
 	
-	border-top: 1px solid #292929;
+	//border-top: 1px solid #292929;
+        border-top: 1px solid #1b2d3f;
 }
 
 .footer-inner {
 	padding: 15px 0;
 	
 	font-size: 12px;
-	background: #111;
+	//background: #111;
+        background: #2c3e50;
 	color: #999;
 }
 

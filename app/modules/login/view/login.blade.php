@@ -3,20 +3,20 @@
 
 @section('loginForm')
     {{Form::open(array('action' => 'loginController@autenticar', 'method' => 'post'))}}
-        <div class="form-group">
-            {{Form::label('usuario','Usuário:', ['class'=>'control-label'])}}
-            {{Form::text('usuario','', ['class'=>'form-control', 'id'=>'usuario', 'placeholder' => 'Usuário' ])}}
+        <h1>Login</h1>		
+        <div class="login-fields">
+            <p>Preencha os campos necessários</p>
+            <div class="field">
+                {{Form::label('usuario','Usuário:', [])}}
+                {{Form::text('usuario','', ['autocomplete'=>'off', 'class'=>'login username-field', 'id'=>'usuario', 'placeholder' => 'Usuário'])}}
+            </div>
+            <div class="field">
+                {{Form::label('senha','Senha:', [])}}
+                {{Form::password('senha', ['autocomplete'=>'off', 'class'=>'login password-field', 'id'=>'senha', 'placeholder' => 'Senha'])}}
+            </div>
         </div>
-        <div class="form-group">
-            {{Form::label('senha','Senha:', ['class'=>'control-label'])}}
-            {{Form::password('senha', ['class'=>'form-control', 'id'=>'senha', 'placeholder' => 'Senha' ])}}
-        </div>
-        @if(!empty($erro))
-            <p class="warning text-center">{{ $erro }}</p>
-        @endif
-        <br>
-        <div class="form-group text-center">
-            {{Form::submit('Login',['class'=>'btn btn-primary']);}}
+        <div class="login-actions">
+            {{Form::submit('Login!',['class'=>'button btn btn-success btn-large']);}}
         </div>
     {{Form::close()}}
 @stop
