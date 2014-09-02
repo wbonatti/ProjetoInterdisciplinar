@@ -10,14 +10,14 @@ Class loginController extends \BaseController
     {
         $post = Input::all();
         if(Autenticacao::efetuaLogin($post))
-            return Redirect::to('/comissoes');
+            return Redirect::to('/inicio');
         
         else
         {
             $erro = "Usuário não encontrado!";
-            $view = View::make('default::header');
+            $view = View::make('default::LoginHeader');
             $view .= View::make('login::login')->with('erro',$erro);
-            $view.= View::make('default::footer');
+            $view.= View::make('default::LoginFooter');
             return $view;
         }
     }

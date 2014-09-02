@@ -11,9 +11,16 @@ Route::get('/logout', function(){
 });
 
 Route::get('/', function(){
-    $view = View::make('default::header');
+    $view  = View::make('login::header');
     $view .= View::make('login::login');
-    $view.= View::make('default::footer');
+    $view .= View::make('login::footer');
+    return $view;
+});
+
+Route::get('/inicio', function(){
+    $view  = View::make('default::header')->with('title','Geral');
+    $view .= View::make('geral::inicio');
+    $view .= View::make('default::footer');
     return $view;
 });
 
