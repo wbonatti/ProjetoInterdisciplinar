@@ -9,188 +9,167 @@ CREATE SCHEMA IF NOT EXISTS `Intranet` DEFAULT CHARACTER SET utf8 COLLATE utf8_g
 USE `Intranet` ;
 
 -- -----------------------------------------------------
--- Table `Intranet`.`FUNCAO`
+-- Table `Intranet`.`funcao`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`FUNCAO` ;
+DROP TABLE IF EXISTS `Intranet`.`funcao` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`FUNCAO` (
-  `FUNCAOID` INT NOT NULL AUTO_INCREMENT,
-  `FUNCAONOME` VARCHAR(128) NULL,
-  PRIMARY KEY (`FUNCAOID`))
+CREATE TABLE IF NOT EXISTS `Intranet`.`funcao` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(128) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`PESSOA`
+-- Table `Intranet`.`pessoa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`PESSOA` ;
+DROP TABLE IF EXISTS `Intranet`.`pessoa` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`PESSOA` (
-  `PESSOAID` INT NOT NULL AUTO_INCREMENT,
-  `PESSOANOME` VARCHAR(128) NULL,
-  `PESSOASOBRENOME` VARCHAR(128) NULL,
-  `DATANASCIMENTO` DATE NULL,
-  `FUNCAO_FUNCAOID` INT NOT NULL,
-  PRIMARY KEY (`PESSOAID`),
-  INDEX `fk_PESSOA_FUNCAO1_idx` (`FUNCAO_FUNCAOID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`pessoa` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(128) NULL,
+  `sobrenome` VARCHAR(128) NULL,
+  `datanascimento` DATE NULL,
+  `funcao_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_PESSOA_FUNCAO1_idx` (`funcao_id` ASC),
   CONSTRAINT `fk_PESSOA_FUNCAO1`
-    FOREIGN KEY (`FUNCAO_FUNCAOID`)
-    REFERENCES `Intranet`.`FUNCAO` (`FUNCAOID`)
+    FOREIGN KEY (`funcao_id`)
+    REFERENCES `Intranet`.`funcao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`CATEGORIA`
+-- Table `Intranet`.`categoria`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`CATEGORIA` ;
+DROP TABLE IF EXISTS `Intranet`.`categoria` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`CATEGORIA` (
-  `CATEGORIAID` INT NOT NULL AUTO_INCREMENT,
-  `CATEGORIANOME` VARCHAR(50) NULL,
-  PRIMARY KEY (`CATEGORIAID`))
+CREATE TABLE IF NOT EXISTS `Intranet`.`categoria` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`USUARIO`
+-- Table `Intranet`.`usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`USUARIO` ;
+DROP TABLE IF EXISTS `Intranet`.`usuario` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`USUARIO` (
-  `USUARIOID` INT NOT NULL AUTO_INCREMENT,
-  `USUARIOEMAIL` VARCHAR(128) NULL,
-  `USUARIOSENHA` VARCHAR(128) NULL,
-  `PESSOA_PESSOAID` INT NOT NULL,
-  `CATEGORIA_CATEGORIAID` INT NOT NULL,
-  PRIMARY KEY (`USUARIOID`),
-  INDEX `fk_USUARIO_PESSOA_idx` (`PESSOA_PESSOAID` ASC),
-  INDEX `fk_USUARIO_CATEGORIA1_idx` (`CATEGORIA_CATEGORIAID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`usuario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `usuario` VARCHAR(128) NULL,
+  `senha` VARCHAR(128) NULL,
+  `pessoa_id` INT NOT NULL,
+  `categoria_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_USUARIO_PESSOA_idx` (`pessoa_id` ASC),
+  INDEX `fk_USUARIO_CATEGORIA1_idx` (`categoria_id` ASC),
   CONSTRAINT `fk_USUARIO_PESSOA`
-    FOREIGN KEY (`PESSOA_PESSOAID`)
-    REFERENCES `Intranet`.`PESSOA` (`PESSOAID`)
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `Intranet`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_USUARIO_CATEGORIA1`
-    FOREIGN KEY (`CATEGORIA_CATEGORIAID`)
-    REFERENCES `Intranet`.`CATEGORIA` (`CATEGORIAID`)
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `Intranet`.`categoria` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`TURMA`
+-- Table `Intranet`.`turma`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`TURMA` ;
+DROP TABLE IF EXISTS `Intranet`.`turma` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`TURMA` (
-  `TURMAID` INT NOT NULL AUTO_INCREMENT,
-  `TURMANOME` VARCHAR(128) NULL,
-  `TURMATURNO` VARCHAR(128) NULL,
-  PRIMARY KEY (`TURMAID`))
+CREATE TABLE IF NOT EXISTS `Intranet`.`turma` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(128) NULL,
+  `turno` VARCHAR(128) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`DISCIPLINA`
+-- Table `Intranet`.`disciplina`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`DISCIPLINA` ;
+DROP TABLE IF EXISTS `Intranet`.`disciplina` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`DISCIPLINA` (
-  `DISCIPLINAID` INT NOT NULL AUTO_INCREMENT,
-  `DISCIPLINANOME` VARCHAR(128) NULL,
-  `TURMA_TURMAID` INT NULL,
-  PRIMARY KEY (`DISCIPLINAID`),
-  INDEX `fk_DISCIPLINA_TURMA1_idx` (`TURMA_TURMAID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`disciplina` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(128) NULL,
+  `turma_id` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_DISCIPLINA_TURMA1_idx` (`turma_id` ASC),
   CONSTRAINT `fk_DISCIPLINA_TURMA1`
-    FOREIGN KEY (`TURMA_TURMAID`)
-    REFERENCES `Intranet`.`TURMA` (`TURMAID`)
+    FOREIGN KEY (`turma_id`)
+    REFERENCES `Intranet`.`turma` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`LOG`
+-- Table `Intranet`.`log`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`LOG` ;
+DROP TABLE IF EXISTS `Intranet`.`log` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`LOG` (
-  `LOGID` INT NOT NULL AUTO_INCREMENT,
-  `LOGDESCRICAO` TEXT NULL,
-  `USUARIO_USUARIOID` INT NOT NULL,
-  PRIMARY KEY (`LOGID`),
-  INDEX `fk_LOG_USUARIO1_idx` (`USUARIO_USUARIOID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`log` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` TEXT NULL,
+  `usuario_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_LOG_USUARIO1_idx` (`usuario_id` ASC),
   CONSTRAINT `fk_LOG_USUARIO1`
-    FOREIGN KEY (`USUARIO_USUARIOID`)
-    REFERENCES `Intranet`.`USUARIO` (`USUARIOID`)
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `Intranet`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`PESSOA_DISCIPLINA`
+-- Table `Intranet`.`pessoa_disciplina`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`PESSOA_DISCIPLINA` ;
+DROP TABLE IF EXISTS `Intranet`.`pessoa_disciplina` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`PESSOA_DISCIPLINA` (
-  `PESSOA_PESSOAID` INT NOT NULL AUTO_INCREMENT,
-  `DISCIPLINA_DISCIPLINAID` INT NOT NULL,
-  PRIMARY KEY (`PESSOA_PESSOAID`, `DISCIPLINA_DISCIPLINAID`),
-  INDEX `fk_PESSOA_has_DISCIPLINA_DISCIPLINA1_idx` (`DISCIPLINA_DISCIPLINAID` ASC),
-  INDEX `fk_PESSOA_has_DISCIPLINA_PESSOA1_idx` (`PESSOA_PESSOAID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`pessoa_disciplina` (
+  `pessoa_id` INT NOT NULL AUTO_INCREMENT,
+  `disciplina_id` INT NOT NULL,
+  PRIMARY KEY (`pessoa_id`, `disciplina_id`),
+  INDEX `fk_PESSOA_has_DISCIPLINA_DISCIPLINA1_idx` (`disciplina_id` ASC),
+  INDEX `fk_PESSOA_has_DISCIPLINA_PESSOA1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_PESSOA_has_DISCIPLINA_PESSOA1`
-    FOREIGN KEY (`PESSOA_PESSOAID`)
-    REFERENCES `Intranet`.`PESSOA` (`PESSOAID`)
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `Intranet`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PESSOA_has_DISCIPLINA_DISCIPLINA1`
-    FOREIGN KEY (`DISCIPLINA_DISCIPLINAID`)
-    REFERENCES `Intranet`.`DISCIPLINA` (`DISCIPLINAID`)
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `Intranet`.`disciplina` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`ATRIBUTO`
+-- Table `Intranet`.`atributo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`ATRIBUTO` ;
+DROP TABLE IF EXISTS `Intranet`.`atributo` ;
 
-CREATE TABLE IF NOT EXISTS `Intranet`.`ATRIBUTO` (
-  `ATRIBUTOID` INT NOT NULL AUTO_INCREMENT,
-  `ATRIBUTONOME` TEXT NULL,
-  `ATRIBUTOVALOR` TEXT NULL,
-  `PESSOA_PESSOAID` INT NOT NULL,
-  PRIMARY KEY (`ATRIBUTOID`),
-  INDEX `fk_ATRIBUTO_PESSOA1_idx` (`PESSOA_PESSOAID` ASC),
+CREATE TABLE IF NOT EXISTS `Intranet`.`atributo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` TEXT NULL,
+  `valor` TEXT NULL,
+  `pessoa_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ATRIBUTO_PESSOA1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_ATRIBUTO_PESSOA1`
-    FOREIGN KEY (`PESSOA_PESSOAID`)
-    REFERENCES `Intranet`.`PESSOA` (`PESSOAID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Intranet`.`AUTENTICADOR`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`AUTENTICADOR` ;
-
-CREATE TABLE IF NOT EXISTS `Intranet`.`AUTENTICADOR` (
-  `TOKIEN` CHAR(8) NOT NULL,
-  `TIMESTAMP` INT NULL,
-  `IP` VARCHAR(45) NULL,
-  `HOST` VARCHAR(45) NULL,
-  `USUARIO_USUARIOID` INT NOT NULL,
-  PRIMARY KEY (`TOKIEN`),
-  INDEX `fk_AUTENTICADOR_USUARIO1_idx` (`USUARIO_USUARIOID` ASC),
-  CONSTRAINT `fk_AUTENTICADOR_USUARIO1`
-    FOREIGN KEY (`USUARIO_USUARIOID`)
-    REFERENCES `Intranet`.`USUARIO` (`USUARIOID`)
+    FOREIGN KEY (`pessoa_id`)
+    REFERENCES `Intranet`.`pessoa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

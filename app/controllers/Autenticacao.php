@@ -10,29 +10,13 @@ Class Autenticacao
      */
     
     public static function efetuaLogin($post){
-        return true;
-        $usuario = DB::table('USUARIO')
-                    ->select(DB::raw("
-                        USUARIOID, 
-                        USUARIOEMAIL, 
-                        PESSOANOME, 
-                        PESSOASOBRENOME, 
-                        DATE_FORMAT(DATANASCIMENTO, '%d-%m-%Y') as DATANASCIMENTO, 
-                        FUNCAOID, 
-                        FUNCAONOME, 
-                        CATEGORIAID, 
-                        CATEGORIANOME"))
-                    ->join('PESSOA', 'PESSOA_PESSOAID', '=', 'PESSOAID')
-                    ->join('CATEGORIA', 'CATEGORIA_CATEGORIAID', '=', 'CATEGORIAID')
-                    ->join('FUNCAO', 'FUNCAO_FUNCAOID', '=', 'FUNCAOID')
-                    ->where('USUARIOEMAIL', '=', $post['usuario'])
-                    ->where('USUARIOSENHA', '=', $post['senha'])
-                    ->get();
-        
-        if(empty($usuario)) return false;
-        
-        Session::put('usuario', $usuario);
-        return true;
+        $usuario = Usuario::where('usuario', '=', $post['usuario'])->where('senha', '=', $post['senha'])->first();
+        if(isset($usuario->id)){
+            $usuario = [ $usuario->id, $usuario->nome];
+            Session::put('usuario', $usuario);
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -40,7 +24,6 @@ Class Autenticacao
      * @return boolean
      */
     public static function verificaLogin(){
-        return true;
         return Session::has('usuario');
     }
     
@@ -49,8 +32,7 @@ Class Autenticacao
      * @return [object]
      */
     public static function getUsuarioLogado(){
-        $usuario =  unserialize(serialize(Session::get('usuario')));
-        return $usuario[0];
+        return Session::get('usuario');
     }
 
 

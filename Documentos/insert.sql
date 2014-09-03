@@ -1,4 +1,4 @@
-
+use intranet;
 ## INSERT TABLE CATEGORIA
 INSERT INTO CATEGORIA VALUES(1,'Administrador');
 INSERT INTO CATEGORIA VALUES(2,'Funcionário');

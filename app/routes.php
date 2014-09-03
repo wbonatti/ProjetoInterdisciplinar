@@ -1,30 +1,29 @@
 <?php
-
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_MONETARY, 'pt_BR');
 // =============================================
 // HOME PAGE ===================================
 // =============================================
-Route::post('/', 'loginController@autenticar');
-Route::get('/logout', function(){
-    return Autenticacao::logout();
-});
 
-Route::get('/', function(){
+
+
+if(!Autenticacao::verificaLogin()){
+    Route::get('/', 'loginController@index');
+    Route::post('/', 'loginController@autenticar');
+}
+else{
+    Route::get('/', 'geralController@index');
+
+    Route::get('/logout', function(){
+        return Autenticacao::logout();
+    });
+}
+
+
+App::missing(function($exception)
+{
     $view  = View::make('login::header');
-    $view .= View::make('login::login');
+    $view .= View::make('default::404');
     $view .= View::make('login::footer');
     return $view;
 });
-
-Route::get('/inicio', function(){
-    $view  = View::make('default::header')->with('title','Geral');
-    $view .= View::make('geral::inicio');
-    $view .= View::make('default::footer');
-    return $view;
-});
-
-Route::get('/geral', 'geralController@inicio');
-
-
-
