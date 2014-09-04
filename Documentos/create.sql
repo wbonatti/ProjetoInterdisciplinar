@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `Intranet`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `Intranet`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `usuario` VARCHAR(128) NULL,
+  `email` VARCHAR(128) NULL,
   `senha` VARCHAR(128) NULL,
   `funcionario_id` INT NOT NULL,
   `categoria_id` INT NOT NULL,
@@ -149,6 +149,7 @@ DROP TABLE IF EXISTS `Intranet`.`log` ;
 CREATE TABLE IF NOT EXISTS `Intranet`.`log` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` TEXT NULL,
+  `data` DATETIME NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_log_usuario1_idx` (`usuario_id` ASC),
@@ -256,7 +257,7 @@ DROP TABLE IF EXISTS `Intranet`.`financeiro` ;
 CREATE TABLE IF NOT EXISTS `Intranet`.`financeiro` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `valor` FLOAT NULL,
-  `data` VARCHAR(45) NULL,
+  `data` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

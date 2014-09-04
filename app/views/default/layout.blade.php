@@ -36,12 +36,9 @@ if (!isset($title))
                         <ul class="nav pull-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-cog"></i> Wellinton Perazzoli <b class="caret"></b>
+                                    <i class="icon-cog"></i> {{ $usuario['email'] }} <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:;">Perfil</a></li>
-                                    <li><a href="javascript:;">Configurações</a></li>
-                                    <li><a href="javascript:;">Ajuda</a></li>
                                     <li><a href="/logout">Sair</a></li>
                                 </ul>
                             </li>

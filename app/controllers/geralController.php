@@ -2,10 +2,10 @@
 
 Class geralController extends \BaseController
 {
-    public $layout = 'default.layout';
-    
     function index()
     {
-        $this->layout->nest('content','geral.index');
+        $usuario = Autenticacao::getUsuarioLogado();
+        $usuario = Usuario::find($usuario['id'])->first();
+        $this->layout->content = View::make('geral.index')->with('usuario', $usuario);
     }
 }

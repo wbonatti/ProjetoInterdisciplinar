@@ -9,7 +9,7 @@ Class loginController extends \BaseController
      */
     function index()
     {
-        $this->layout->nest('content','login.index');
+        $this->layout->content = View::make('login.index');
     }
     /**
      * Autentica e redireciona o usuário
@@ -18,17 +18,13 @@ Class loginController extends \BaseController
     function autenticar()
     {
         $erro = ' ';
-        $rules = [
-            'usuario' => 'required',
-            'senha' => 'required'
-        ];
+        $rules = Usuario::getRules();
         
         $validator = Validator::make(Input::all(), $rules);
         
         if (!$validator->fails()):
-            if(Autenticacao::efetuaLogin(Input::all())) return Redirect::to('/');
-            else $erro = 'Usuário ou senha inválidos.';
-
+            if(Autenticacao::efetuaLogin(Input::all()) == true) return Redirect::to('/');
+            else $erro = Autenticacao::efetuaLogin(Input::all());
         endif;
         
         $this->layout->content = View::make('login.index')->withErrors($validator)->withInput(Input::except('senha'))->with('erro', $erro);
