@@ -4,32 +4,40 @@
         <div class="container">
             <div class="row">
                 <div class="span6">
-                    <div class="widget widget-nopad">
+                    <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-user"></i>
-                            <h3>Meus Dados</h3>
+                            <h3>Aniversariantes no mês de {{ucfirst($mes)}}</h3>
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                            <div class="widget big-stats-container">
-                                <div class="widget-content">
-                                    Nome:   {{$usuario->funcionario->pessoa->nome}} {{$usuario->funcionario->pessoa->sobrenome}}<br>
-                                    Email:  {{$usuario->email}}<br>
-                                    Categoria: {{$usuario->categoria->nome }}
-                                </div>
-                                <!-- /widget-content --> 
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /widget -->
-                    <div class="widget widget-nopad">
-                        <div class="widget-header"> <i class="icon-list-alt"></i>
-                            <h3> Recent News</h3>
-                        </div>
-                        <!-- /widget-header -->
-                        <div class="widget-content">
-                            <div id='calendar'>
-                            </div>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> Nome </th>
+                                        <th> Dia </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $naotem = true ?>
+                                    @foreach($aniversariantes as $aniversariante)
+                                        @if($aniversariante->funcionario != null)
+                                            <?php 
+                                                $aniversario = $aniversariante->getDate('datanascimento'); 
+                                                $naotem = false;
+                                            ?>
+                                            <tr>
+                                                <td> {{ $aniversariante->nome }} </td>
+                                                <td> {{ $aniversario->format('d'); }} </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    @if($naotem)
+                                        <tr>
+                                            <td class="warning text-center" colspan="2"> Nenhum aniversáriante neste mês. </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
                         <!-- /widget-content --> 
                     </div>

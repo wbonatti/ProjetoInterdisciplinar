@@ -8,7 +8,6 @@ Class Autenticacao
      * @param type $post
      * @return boolean
      */
-    
     public static function efetuaLogin($post){
         $usuario = Usuario::where('email', '=', $post['email'])->where('senha', '=', $post['senha'])->first();
         if(isset($usuario->id)){

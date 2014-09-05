@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_MONETARY, 'pt_BR');
+setlocale(LC_TIME, 'PT-BR');
 // =============================================
 // HOME PAGE ===================================
 // =============================================

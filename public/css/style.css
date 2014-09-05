@@ -7,6 +7,9 @@ Bootstrap Admin Template by EGrappler.com
 /*------------------------------------------------------------------
 [1. Global]
 */
+.text-center{
+    text-align: center !important;
+}
 
 body {
 	background: #f9f6f1;
