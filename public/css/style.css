@@ -10,6 +10,13 @@ Bootstrap Admin Template by EGrappler.com
 .text-center{
     text-align: center !important;
 }
+.text-right{
+    text-align: right !important;
+}
+.adjust-footer-btn{
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
 
 body {
 	background: #f9f6f1;
