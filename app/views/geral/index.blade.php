@@ -34,7 +34,7 @@
                     </div>
                     <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-gift"></i>
-                            <h3>Aniversariantes no mês de {{ucfirst($mes)}}</h3>
+                            <h3>Aniversariantes no mês</h3>
                         </div>
                         <div class="widget-content">
                             <table class="table table-striped table-bordered">
@@ -74,7 +74,7 @@
                     <!-- /widget -->
                     <div class="widget">
                         <div class="widget-header"> <i class="icon-signal"></i>
-                            <h3>Estatísticas: Pessoas Cadastradas </h3>
+                            <h3>Pessoas Cadastradas </h3>
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">

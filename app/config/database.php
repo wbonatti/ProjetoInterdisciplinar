@@ -48,9 +48,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'intranet',
+			'database'  => 'Intranet',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'senhadoroot',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci'
 		)
