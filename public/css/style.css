@@ -16,11 +16,11 @@ footer{
 .btn-show:hover span{
     display: initial;
 }
-#no-more-tables td.action-buttons { 
+.responsive-table td.action-buttons { 
     text-align: right !important;
 }
 @media only screen and (min-width: 801px) {
-    #no-more-tables td.action-buttons { 
+    .responsive-table td.action-buttons { 
         width: 200px;
         max-width: 200px;
 
@@ -29,25 +29,25 @@ footer{
 @media only screen and (max-width: 800px) {
     
     /* Force table to not be like tables anymore */
-	#no-more-tables table, 
-	#no-more-tables thead, 
-	#no-more-tables tbody, 
-	#no-more-tables th, 
-	#no-more-tables td, 
-	#no-more-tables tr { 
+	.responsive-table table, 
+	.responsive-table thead, 
+	.responsive-table tbody, 
+	.responsive-table th, 
+	.responsive-table td, 
+	.responsive-table tr { 
 		display: block; 
 	}
  
 	/* Hide table headers (but not display: none;, for accessibility) */
-	#no-more-tables thead tr { 
+	.responsive-table thead tr { 
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
  
-	#no-more-tables tr { border: 1px solid #eee; }
+	.responsive-table tr { border: 1px solid #eee; }
  
-	#no-more-tables td { 
+	.responsive-table td { 
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee; 
@@ -58,7 +58,7 @@ footer{
                 vertical-align: middle !important;
 	}
  
-	#no-more-tables td.action-buttons { 
+	.responsive-table td.action-buttons { 
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee; 
@@ -68,7 +68,7 @@ footer{
                 vertical-align: middle !important;
 	}
  
-	#no-more-tables td:before { 
+	.responsive-table td:before { 
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
@@ -84,10 +84,10 @@ footer{
 	/*
 	Label the data
 	*/
-	#no-more-tables td:before { 
+	.responsive-table td:before { 
             content: attr(data-title); 
         }
-	#no-more-tables td.action-buttons:before { 
+	.responsive-table td.action-buttons:before { 
             content: initial; 
         }
 }
