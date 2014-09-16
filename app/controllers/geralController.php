@@ -2,6 +2,7 @@
 
 Class geralController extends \BaseController
 {
+    public $menu = 0;
     function index()
     {
         $usuario = Autenticacao::getUsuarioLogado();

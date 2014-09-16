@@ -14,6 +14,9 @@ if(!Autenticacao::verificaLogin()){
 }
 else{
     Route::get('/', 'geralController@index');
+    Route::group(array('prefix' => 'funcionarios'), function(){
+        Route::get('/','funcionariosController@index');
+    });
 
     Route::get('/logout', function(){
         return Autenticacao::logout();

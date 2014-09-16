@@ -9,6 +9,10 @@ class Funcionario extends BaseModel {
         return $this->HasOne('Usuario');
     }
     
+    public function funcao(){
+        return $this->BelongsTo('Funcao');
+    }
+    
     public function pessoa(){
         return $this->BelongsTo('Pessoa');
     }

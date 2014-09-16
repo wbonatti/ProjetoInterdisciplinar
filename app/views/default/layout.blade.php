@@ -28,108 +28,55 @@ if (!isset($title))
         <script src="/js/base.js"></script> 
     </head>
     <body>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                            class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="/inicio">Intranet </a>
-                    <div class="nav-collapse">
-                        <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-cog"></i> {{ $usuario['email'] }} <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/logout">Sair</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse --> 
-                </div>
-                <!-- /container --> 
-            </div>
-            <!-- /navbar-inner --> 
-        </div>
-        <!-- /navbar -->
-        <div class="subnavbar">
-            <div class="subnavbar-inner">
-                <div class="container">
-                    <ul class="mainnav">
-                        <li class="active"><a href="javascript:;"><i class="icon-dashboard"></i><span>Geral</span> </a> </li>
-                        <li><a href="javascript:;"><i class="icon-book"></i><span>Funcionários</span> </a> </li>
-                        <li><a href="javascript:;"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
-                        <li><a href="javascript:;"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
-                        <li><a href="javascript:;"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
-                        <li><a href="javascript:;"><i class="icon-eye-open"></i><span>Registro</span> </a> </li>
-                    </ul>
-                </div>
-                <!-- /container --> 
-            </div>
-            <!-- /subnavbar-inner --> 
-        </div>
-        {{ $content }}
-        <footer>
-            <!-- /main -->
-            <div class="extra">
-                <div class="extra-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="span3">
-                                <h4>
-                                    About Free Admin Template</h4>
-                                <ul>
-                                    <li><a href="javascript:;">EGrappler.com</a></li>
-                                    <li><a href="javascript:;">Web Development Resources</a></li>
-                                    <li><a href="javascript:;">Responsive HTML5 Portfolio Templates</a></li>
-                                    <li><a href="javascript:;">Free Resources and Scripts</a></li>
-                                </ul>
-                            </div>
-                            <!-- /span3 -->
-                            <div class="span3">
-                                <h4>
-                                    Support</h4>
-                                <ul>
-                                    <li><a href="javascript:;">Frequently Asked Questions</a></li>
-                                    <li><a href="javascript:;">Ask a Question</a></li>
-                                    <li><a href="javascript:;">Video Tutorial</a></li>
-                                    <li><a href="javascript:;">Feedback</a></li>
-                                </ul>
-                            </div>
-                            <!-- /span3 -->
-                            <div class="span3">
-                                <h4>
-                                    Something Legal</h4>
-                                <ul>
-                                    <li><a href="javascript:;">Read License</a></li>
-                                    <li><a href="javascript:;">Terms of Use</a></li>
-                                    <li><a href="javascript:;">Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                            <!-- /span3 -->
-                            <div class="span3">
-                                <h4>
-                                    Open Source jQuery Plugins</h4>
-                                <ul>
-                                    <li><a href="http://www.egrappler.com">Open Source jQuery Plugins</a></li>
-                                    <li><a href="http://www.egrappler.com;">HTML5 Responsive Tempaltes</a></li>
-                                    <li><a href="http://www.egrappler.com;">Free Contact Form Plugin</a></li>
-                                    <li><a href="http://www.egrappler.com;">Flat UI PSD</a></li>
-                                </ul>
-                            </div>
-                            <!-- /span3 -->
+        <div class="geral">
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                                class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="/inicio">Intranet </a>
+                        <div class="nav-collapse">
+                            <ul class="nav pull-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon-cog"></i> {{ $usuario['email'] }} <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/logout">Sair</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
-                        <!-- /row --> 
+                        <!--/.nav-collapse --> 
                     </div>
                     <!-- /container --> 
                 </div>
-                <!-- /extra-inner --> 
+                <!-- /navbar-inner --> 
             </div>
+            <!-- /navbar -->
+            <div class="subnavbar">
+                <div class="subnavbar-inner">
+                    <div class="container">
+                        <ul class="mainnav">
+                            <li class="{{$menu[0]}}"><a href="/"><i class="icon-dashboard"></i><span>Geral</span> </a> </li>
+                            <li class="{{$menu[1]}}"><a href="/funcionarios"><i class="icon-book"></i><span>Funcionários</span> </a> </li>
+                            <li class="{{$menu[2]}}"><a href="javascript:;"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
+                            <li class="{{$menu[3]}}"><a href="javascript:;"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
+                            <li class="{{$menu[4]}}"><a href="javascript:;"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
+                            <li class="{{$menu[5]}}"><a href="javascript:;"><i class="icon-eye-open"></i><span>Registro</span> </a> </li>
+                        </ul>
+                    </div>
+                    <!-- /container --> 
+                </div>
+                <!-- /subnavbar-inner --> 
+            </div>
+            {{ $content }}
+        </div>
+        <footer>
             <!-- /extra -->
             <div class="footer">
                 <div class="footer-inner">
                     <div class="container">
                         <div class="row">
-                            <div class="span12"> &copy; 2013 <a href="http://www.egrappler.com/">Bootstrap Responsive Admin Template</a>. </div>
+                            <div class="span12"> &copy; 2014 - Intranet - Curso Superior em Análise e Desenvolvimento de Sistemas </div>
                             <!-- /span12 --> 
                         </div>
                         <!-- /row --> 
@@ -139,6 +86,5 @@ if (!isset($title))
                 <!-- /footer-inner --> 
             </div>
         </footer>
-        <!-- /footer --> 
     </body>
 </html>
