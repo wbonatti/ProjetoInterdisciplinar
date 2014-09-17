@@ -5,6 +5,9 @@ Bootstrap Admin Template by EGrappler.com
     width: 200px;
     margin: 0 auto;
 }
+.text-warning{
+    color: #f5a732 !important;
+}
 .text-success{
     color: #7eb216 !important;
 }

@@ -1,6 +1,6 @@
 <div class="account-container">
 	<div class="content clearfix">
-        {{Form::open(array('action' => 'loginController@autenticar', 'method' => 'post'))}}
+        {{Form::open(array('action' => 'defaultController@autenticar', 'method' => 'post'))}}
             <h1>Login</h1>		
             <div class="login-fields">
                 <p>Preencha os campos necessários</p>

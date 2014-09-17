@@ -27,4 +27,10 @@ Class geralController extends \BaseController
             'numeroPessoa' => $numeroPessoa
         ]);
     }
+    
+        
+    function meusdados()
+    {
+        $this->layout->content = View::make('default.meusdados');
+    }
 }
