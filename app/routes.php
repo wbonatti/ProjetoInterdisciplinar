@@ -17,6 +17,12 @@ else{
     Route::group(array('prefix' => 'funcionarios'), function(){
         Route::get('/','funcionariosController@index');
     });
+    Route::group(array('prefix' => 'alunos'), function(){
+        Route::get('/','alunosController@index');
+    });
+    Route::group(array('prefix' => 'registros'), function(){
+        Route::get('/','registroController@index');
+    });
 
     Route::get('/logout', function(){
         return Autenticacao::logout();

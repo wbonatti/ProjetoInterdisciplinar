@@ -50,7 +50,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'Intranet',
 			'username'  => 'root',
-			'password'  => 'senhadoroot',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci'
 		)

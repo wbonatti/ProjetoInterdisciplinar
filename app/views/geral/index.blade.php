@@ -78,7 +78,7 @@
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                            <canvas id="area-chart" class="chart-holder" style="max-width: 538px; width: 100% !important; height: auto !important; margin: 0 auto;"> </canvas>
+                            <canvas id="area-chart" class="chart-holder"  width="538" height="250" style="max-width: 538px; width: 100% !important; height: auto !important; margin: 0 auto;"> </canvas>
                             <!-- /area-chart --> 
                             <hr>
                             <p class="text-danger"><a class="btn btn-danger"></a> <b>Alunos:</b> {{$numeroAluno}} ({{$numeroPessoa / $numeroAluno * 10}}%)</p>

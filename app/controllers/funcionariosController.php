@@ -7,7 +7,9 @@ Class funcionariosController extends \BaseController
     function index()
     {
         $funcionarios = Funcionario::paginate(10);
+        $funcoes = Funcao::all();
         $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios);
+                ->with('funcionarios', $funcionarios)
+                ->with('funcoes', $funcoes);
     }
 }

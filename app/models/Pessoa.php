@@ -13,6 +13,10 @@ class Pessoa extends BaseModel {
         return $this->HasOne('Usuario');
     }
     
+    public function responsavel(){
+        return $this->HasOne('Responsavel');
+    }
+    
     public function aluno(){
         return $this->HasOne('Aluno');
     }

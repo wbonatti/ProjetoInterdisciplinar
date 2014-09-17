@@ -58,10 +58,10 @@ if (!isset($title))
                         <ul class="mainnav">
                             <li class="{{$menu[0]}}"><a href="/"><i class="icon-dashboard"></i><span>Geral</span> </a> </li>
                             <li class="{{$menu[1]}}"><a href="/funcionarios"><i class="icon-book"></i><span>Funcionários</span> </a> </li>
-                            <li class="{{$menu[2]}}"><a href="javascript:;"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
+                            <li class="{{$menu[2]}}"><a href="/alunos"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
                             <li class="{{$menu[3]}}"><a href="javascript:;"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
                             <li class="{{$menu[4]}}"><a href="javascript:;"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
-                            <li class="{{$menu[5]}}"><a href="javascript:;"><i class="icon-eye-open"></i><span>Registro</span> </a> </li>
+                            <li class="{{$menu[5]}}"><a href="/registros"><i class="icon-eye-open"></i><span>Registro</span> </a> </li>
                         </ul>
                     </div>
                     <!-- /container --> 

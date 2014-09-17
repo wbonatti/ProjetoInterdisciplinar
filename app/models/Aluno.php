@@ -9,6 +9,10 @@ class Aluno extends BaseModel {
         return $this->BelongsTo('Pessoa');
     }
     
+    public function responsavel(){
+        return $this->HasOne('Responsavel');
+    }
+    
     public static function getRules(){
         return [
 
