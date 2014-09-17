@@ -4,6 +4,15 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
+                    
+                    <div class="widget widget-table action-table">
+                        <div class="widget-header">
+                            {{ Form::open(array('method' => 'GET', 'style'=>'margin-top: 3px; margin-left: 5px;')) }}
+                                {{Form::select('filtro', $usuarios, '', array('style'=>'margin-left: 10px;width: 65%;'));}}
+                                {{Form::submit('Filtrar', array('class'=>'pull-right','style'=>'margin-right: 10px; margin-top: 3px'));}}
+                            {{ Form::close() }}
+                        </div>
+                    </div>
                     <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-save"></i>
                             <h3>Registro de Alterações</h3>

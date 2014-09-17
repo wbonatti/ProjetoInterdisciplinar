@@ -61,7 +61,7 @@ if (!isset($title))
                             <li class="{{$menu[2]}}"><a href="/alunos"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
                             <li class="{{$menu[3]}}"><a href="javascript:;"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
                             <li class="{{$menu[4]}}"><a href="javascript:;"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
-                            <li class="{{$menu[5]}}"><a href="/registros"><i class="icon-eye-open"></i><span>Registro</span> </a> </li>
+                            <li class="{{$menu[5]}}"><a href="/registros"><i class="icon-eye-open"></i><span>Registros</span> </a> </li>
                         </ul>
                     </div>
                     <!-- /container --> 

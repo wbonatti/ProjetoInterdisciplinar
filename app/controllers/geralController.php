@@ -3,6 +3,8 @@
 Class geralController extends \BaseController
 {
     public $menu = 0;
+    public $title = 'Geral';
+    
     function index()
     {
         $usuario = Autenticacao::getUsuarioLogado();

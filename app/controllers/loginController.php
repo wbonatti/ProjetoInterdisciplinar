@@ -3,6 +3,7 @@
 Class loginController extends \BaseController
 {
     public $layout = 'default.notlogged_layout';
+    public $title = 'Login';
     /**
      * Autentica e redireciona o usuário
      * 
@@ -26,7 +27,6 @@ Class loginController extends \BaseController
             if(Autenticacao::efetuaLogin(Input::all()) == true) return Redirect::to('/');
             else $erro = Autenticacao::efetuaLogin(Input::all());
         endif;
-        
         $this->layout->content = View::make('login.index')->withErrors($validator)->withInput(Input::except('senha'))->with('erro', $erro);
     }
 }

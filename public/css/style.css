@@ -3,6 +3,8 @@ Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 html{
     position: relative;
+    width: 100%;
+    overflow-x: hidden;
     min-height: 100%;
 }
 body{
@@ -485,7 +487,7 @@ textarea {
 
 .footer-inner {
 	padding: 15px 0;
-	
+	padding-right: 20px;
 	font-size: 12px;
 	//background: #111;
         background: #2c3e50;

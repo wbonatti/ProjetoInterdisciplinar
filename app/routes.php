@@ -29,11 +29,23 @@ else{
     });
 }
 
-
-App::missing(function($exception)
+App::error(function($exception, $code)
 {
-    $view  = View::make('login::header');
-    $view .= View::make('default::404');
-    $view .= View::make('login::footer');
+    switch ($code)
+    {   
+        case 404:
+            $msg = 'Desculpe, não conseguimos identificar a página que você está tentando acessar.';
+            $view = View::make('default.notlogged_layout')->nest('content', 'default.error', ['erroTitle'=>'404','msgException'=>$exception, 'msg'=>$msg])->with('title','404');
+            break;
+        case 500:
+            $msg = 'Desculpe, mas houve um erro na sua navegação.';
+            $view = View::make('default.notlogged_layout')->nest('content', 'default.error', ['erroTitle'=>'500','msgException'=>$exception, 'msg'=>$msg])->with('title','500');
+            break;
+        default:
+            $msg = 'Desculpe, um erro ocorreu.';
+            $view = View::make('default.notlogged_layout')->nest('content', 'default.error', ['erroTitle'=>'500','msgException'=>$exception, 'msg'=>$msg])->with('title','500');
+            break;
+    }
+        
     return $view;
 });

@@ -3,6 +3,7 @@
 Class alunosController extends \BaseController
 {
     public $menu = 2;
+    public $title = 'Alunos';
     
     function index()
     {

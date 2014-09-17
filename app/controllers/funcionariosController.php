@@ -3,6 +3,7 @@
 Class funcionariosController extends \BaseController
 {
     public $menu = 1;
+    public $title = 'Funcionários';
     
     function index()
     {

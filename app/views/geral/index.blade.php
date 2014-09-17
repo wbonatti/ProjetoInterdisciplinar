@@ -28,7 +28,7 @@
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
-                                <a href="javascript:;" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
+                                <a href="/registros" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
                             </div>
                         </div>
                     </div>
