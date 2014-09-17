@@ -105,19 +105,19 @@
 				{
 				    value: {{$numeroAluno}},
 				    color: "#db3325",
-                                    highlight: "#EC4436",
+                                    highlight: "#FD5547",
                                     label: 'Alunos'
 				},
 				{
 				    value: {{$numeroFuncionario}},
 				    color: "#7eb216",
-                                    highlight: "#8FC327",
+                                    highlight: "#A0D438",
                                     label: 'Funcionários'
 				},
 				{
 				    value: {{$numeroOutro}},
 				    color: "#4eb2d5",
-                                    highlight: "#5FC3E6",
+                                    highlight: "#70D4F7",
                                     label: 'Outros'
 				}
 			];
