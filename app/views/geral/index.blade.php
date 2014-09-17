@@ -78,7 +78,9 @@
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                            <canvas id="area-chart" class="chart-holder"  width="538" height="250" style="max-width: 538px; width: 100% !important; height: auto !important; margin: 0 auto;"> </canvas>
+                            <div class="area-chart">
+                                <canvas id="area-chart" class="chart-holder"  width="400" height="200" style="margin: 0 -100px;"> </canvas>
+                            </div>
                             <!-- /area-chart --> 
                             <hr>
                             <p class="text-danger"><a class="btn btn-danger"></a> <b>Alunos:</b> {{$numeroAluno}} ({{$numeroPessoa / $numeroAluno * 10}}%)</p>
@@ -101,16 +103,22 @@
 <script>
     var graficoData = [
 				{
-				    value: {{$numeroPessoa / $numeroAluno * 10}},
-				    color: "#db3325"
+				    value: {{$numeroAluno}},
+				    color: "#db3325",
+                                    highlight: "#EC4436",
+                                    label: 'Alunos'
 				},
 				{
-				    value: {{$numeroPessoa / $numeroFuncionario * 10}},
-				    color: "#7eb216"
+				    value: {{$numeroFuncionario}},
+				    color: "#7eb216",
+                                    highlight: "#8FC327",
+                                    label: 'Funcionários'
 				},
 				{
-				    value: {{$numeroPessoa / $numeroOutro * 10}},
-				    color: "#4eb2d5"
+				    value: {{$numeroOutro}},
+				    color: "#4eb2d5",
+                                    highlight: "#5FC3E6",
+                                    label: 'Outros'
 				}
 			];
 

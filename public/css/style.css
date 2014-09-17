@@ -1,6 +1,16 @@
 /*------------------------------------------------------------------
 Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
+.area-chart{
+    width: 200px;
+    margin: 0 auto;
+}
+.text-success{
+    color: #7eb216 !important;
+}
+.text-info{
+    color: #4eb2d5 !important;
+}
 html{
     position: relative;
     width: 100%;
