@@ -2,7 +2,7 @@
 
 Class registroController extends \BaseController
 {
-    public $menu = 5;
+    public $menu = 6;
     public $title = 'Registro';
     
     function index()

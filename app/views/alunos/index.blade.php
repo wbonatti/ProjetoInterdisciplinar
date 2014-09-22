@@ -31,15 +31,16 @@
                                                 @endif
                                             </td>
                                             <td data-title='Ações' class="action-buttons">
-                                                <a href="javascript:;" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
-                                                <a href="javascript:;" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/alunos/visualizar/{{$a->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/alunos/alterar/{{$a->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/alunos/deletar/{{$a->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
-                                <a href="javascript:;" class="btn btn-success btn-small btn-show pull-left btn-ajust" title="Deletar"><i class="btn-icon-only icon-plus"> </i> Novo Aluno</a>
+                                <a href="/alunos/novo" class="btn btn-success btn-small btn-show pull-left btn-ajust" title="Novo Aluno"><i class="btn-icon-only icon-plus"> </i> Novo Aluno</a>
                                 {{$alunos->links()}}
                             </div>
                         </div>

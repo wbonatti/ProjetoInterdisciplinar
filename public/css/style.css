@@ -63,14 +63,14 @@ footer{
 .responsive-table td.action-buttons { 
     text-align: right !important;
 }
-@media only screen and (min-width: 801px) {
+@media only screen and (min-width: 981px) {
     .responsive-table td.action-buttons { 
         width: 200px;
         max-width: 200px;
 
     }
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 980px) {
     
     /* Force table to not be like tables anymore */
 	.responsive-table table, 

@@ -11,11 +11,11 @@
                         </div>
                         <div class="widget-content">
                             <div class="shortcuts"> 
-                                <a href="javascript:;" class="shortcut">
+                                <a href="/funcionarios/novo" class="shortcut">
                                     <i class="shortcut-icon icon-user"></i>
                                     <span class="shortcut-label">Novo Funcionário</span> 
                                 </a> 
-                                <a href="javascript:;" class="shortcut">
+                                <a href="/funcionarios/funcao" class="shortcut">
                                     <i class="shortcut-icon icon-group"></i>
                                     <span class="shortcut-label">Nova Função</span> 
                                 </a>
@@ -71,8 +71,9 @@
                                             <td data-title='Nome'>{{$f->pessoa->nome.''.$f->pessoa->sobrenome}}</td>
                                             <td data-title='Função'>{{$f->funcao->nome}}</td>
                                             <td data-title='Ações' class="action-buttons">
-                                                <a href="javascript:;" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
-                                                <a href="javascript:;" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/funcionarios/visualizar/{{$f->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/funcionarios/alterar/{{$f->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/funcionarios/deletar/{{$f->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             </td>
                                         </tr>
                                     @endforeach

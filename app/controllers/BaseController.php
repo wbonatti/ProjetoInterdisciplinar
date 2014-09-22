@@ -13,7 +13,7 @@ class BaseController extends Controller {
     {
         if ( ! is_null($this->layout))
         {
-            $menu = [' ',' ',' ',' ',' ',' '];
+            $menu = [' ',' ',' ',' ',' ',' ', ' '];
             $this->layout = View::make($this->layout);
             if(is_numeric($this->menu)) $menu[$this->menu] = 'active';
             $this->layout->menu = $menu; 

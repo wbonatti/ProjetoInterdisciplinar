@@ -22,10 +22,24 @@ else{
     
     Route::group(array('prefix' => 'funcionarios'), function(){
         Route::get('/','funcionariosController@index');
+        Route::get('/alterar/{x}','funcionariosController@alterar');
+        Route::post('/alterar/{x}','funcionariosController@salvaralterar');
+        Route::get('/visualizar/{x}','funcionariosController@visualizar');
+        Route::get('/deletar/{x}','funcionariosController@deletar');
+        Route::get('/novo','funcionariosController@novo');
+        Route::post('/novo','funcionariosController@salvarnovo');
+        Route::get('/funcao','funcionariosController@novafuncao');
+        Route::post('/funcao','funcionariosController@salvarfuncao');
     });
     
     Route::group(array('prefix' => 'alunos'), function(){
         Route::get('/','alunosController@index');
+        Route::get('/novo','alunosController@novo');
+        Route::post('/novo','alunosController@salvarnovo');
+        Route::get('/alterar/{x}','alunosController@alterar');
+        Route::post('/alterar/{x}','alunosController@salvaralterar');
+        Route::get('/visualizar/{x}','alunosController@visualizar');
+        Route::get('/deletar/{x}','alunosController@deletar');
     });
     
     Route::group(array('prefix' => 'administracao'), function(){
@@ -38,6 +52,10 @@ else{
     
     Route::group(array('prefix' => 'registros'), function(){
         Route::get('/','registroController@index');
+    });
+    
+    Route::group(array('prefix' => 'usuarios'), function(){
+        Route::get('/','usuarioController@index');
     });
 
     Route::get('/logout', function(){
