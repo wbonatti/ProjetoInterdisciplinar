@@ -17,6 +17,7 @@ else{
     Route::group(array('prefix' => '/'), function(){
         Route::get('/','geralController@index');
         Route::get('/meusdados','geralController@meusdados');
+        Route::post('/meusdados','geralController@alterardados');
     });
     
     Route::group(array('prefix' => 'funcionarios'), function(){

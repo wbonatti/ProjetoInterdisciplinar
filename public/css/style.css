@@ -1,6 +1,19 @@
 /*------------------------------------------------------------------
 Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
+.form-horizontal{
+    margin-bottom: 30px;
+}
+.clear-footer{
+    height: 20px;
+    min-height: 20px;
+}
+.footer-actions{
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    margin-left: -20px;
+}
 .area-chart{
     width: 200px;
     margin: 0 auto;

@@ -31,6 +31,60 @@ Class geralController extends \BaseController
         
     function meusdados()
     {
-        $this->layout->content = View::make('default.meusdados');
+        $usuario = Autenticacao::getUsuarioLogado();
+        $usuario = Usuario::find($usuario['id']);
+        $dados['email'] = $usuario->email;
+        $dados['nome'] = $usuario->funcionario->pessoa->nome;
+        $dados['sobrenome'] = $usuario->funcionario->pessoa->sobrenome;
+        $dados['cpf'] = $usuario->funcionario->cpf;
+        $dados['rg'] = $usuario->funcionario->rg;
+        $dados['nascimento'] = $usuario->funcionario->pessoa->getFormatedDate('datanascimento','d/m/Y');
+        $dados['salario'] = $usuario->funcionario->salario;
+        $this->layout->content = View::make('geral.meusdados')->with('dados',$dados);
+    }
+    
+        
+    function alterardados()
+    {
+        $post = Input::all();
+        $usuario = Autenticacao::getUsuarioLogado();
+        $usuario = Usuario::find($usuario['id']);
+        $dados['email'] = $usuario->email;
+        $dados['nome'] = $post['nome'];
+        $dados['sobrenome'] = $post['sobrenome'];
+        $dados['cpf'] = $usuario->funcionario->cpf;
+        $dados['rg'] = $usuario->funcionario->rg;
+        $dados['nascimento'] = $post['nascimento'];
+        $dados['salario'] = $usuario->funcionario->salario;
+        
+        $senha = true;
+        if($post['senha'] != $usuario->senha) $senha = false;
+        
+        $success = false;
+        $rules = [
+            'senha' => [
+                'required'
+            ],
+            'nome' => [
+                'required'
+            ],
+            'sobrenome' => [
+                'required'
+            ],
+            'nascimento' => [
+                'required',
+                'date_format:"d/m/Y"'
+            ]
+        ];
+        $validator = Validator::make($post, $rules);
+        if(!$validator->fails() && $senha){
+            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['nascimento']);
+            $usuario->funcionario->pessoa->datanascimento = $nascimento->format('Y/m/d');
+            $usuario->funcionario->pessoa->nome = $dados['nome'];
+            $usuario->funcionario->pessoa->sobrenome = $dados['sobrenome'];
+            $usuario->funcionario->pessoa->save();
+            $success = true;
+        }
+        $this->layout->content = View::make('geral.meusdados')->with('dados',$dados)->withErrors($validator)->with('success',$success)->with('senha',$senha);
     }
 }
