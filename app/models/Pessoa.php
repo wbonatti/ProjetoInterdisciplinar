@@ -23,7 +23,16 @@ class Pessoa extends BaseModel {
     
     public static function getRules(){
         return [
-
+            'nome' => [
+                'required'
+            ],
+            'sobrenome' => [
+                'required'
+            ],
+            'datanascimento' => [
+                'required',
+                'date_format:"d/m/Y"'
+            ]
         ];
     }
 }

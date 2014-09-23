@@ -22,13 +22,13 @@
                                         <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Successo!</h4>
-                                            Funcionário alterado com sucesso.
+                                            Funcionário cadastrado com sucesso.
                                         </div>
                                     @else
                                         <div class="alert alert-danger alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Erro!</h4>
-                                            Houve um erro ao alterar o funcionário.
+                                            Houve um erro ao cadastrar o funcionário.
                                         </div>
                                     @endif
                                 @endif

@@ -7,10 +7,9 @@ Class geralController extends \BaseController
     
     function index()
     {
-        $usuario = Autenticacao::getUsuarioLogado();
-        $usuario = Usuario::where('id','=',$usuario['id'])->first();
+        $usuario = Autenticacao::UsuarioLogadoObject();
         $aniversariantes = Pessoa::whereRaw('month(datanascimento) = month(now())')->get();
-        $logs = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('DATE(data) DESC')->limit(10)->get();
+        $logs = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('data DESC')->limit(10)->get();
         $numeroAlunos = Aluno::count();
         $numeroFuncionario = Funcionario::count();
         $numeroPessoa = Pessoa::count();
@@ -31,8 +30,7 @@ Class geralController extends \BaseController
         
     function meusdados()
     {
-        $usuario = Autenticacao::getUsuarioLogado();
-        $usuario = Usuario::find($usuario['id']);
+        $usuario = Autenticacao::UsuarioLogadoObject();
         $dados['email'] = $usuario->email;
         $dados['nome'] = $usuario->funcionario->pessoa->nome;
         $dados['sobrenome'] = $usuario->funcionario->pessoa->sobrenome;
@@ -47,42 +45,28 @@ Class geralController extends \BaseController
     function alterardados()
     {
         $post = Input::all();
-        $usuario = Autenticacao::getUsuarioLogado();
-        $usuario = Usuario::find($usuario['id']);
-        $dados['email'] = $usuario->email;
-        $dados['nome'] = $post['nome'];
-        $dados['sobrenome'] = $post['sobrenome'];
-        $dados['cpf'] = $usuario->funcionario->cpf;
-        $dados['rg'] = $usuario->funcionario->rg;
-        $dados['nascimento'] = $post['nascimento'];
-        $dados['salario'] = $usuario->funcionario->salario;
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        $dados = [  'email' => $usuario->email,
+                    'nome' => $post['nome'],
+                    'sobrenome' => $post['sobrenome'],
+                    'nascimento' => $post['nascimento'],
+                    'cpf' => $usuario->funcionario->cpf,
+                    'rg' => $usuario->funcionario->rg,
+                    'salario' => $usuario->funcionario->salario
+        ];
         
         $senha = true;
         if($post['senha'] != $usuario->senha) $senha = false;
         
         $success = false;
-        $rules = [
-            'senha' => [
-                'required'
-            ],
-            'nome' => [
-                'required'
-            ],
-            'sobrenome' => [
-                'required'
-            ],
-            'nascimento' => [
-                'required',
-                'date_format:"d/m/Y"'
-            ]
-        ];
-        $validator = Validator::make($post, $rules);
+        $validator = Validator::make($post, Pessoa::getRules());
         if(!$validator->fails() && $senha){
             $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['nascimento']);
             $usuario->funcionario->pessoa->datanascimento = $nascimento->format('Y/m/d');
             $usuario->funcionario->pessoa->nome = $dados['nome'];
             $usuario->funcionario->pessoa->sobrenome = $dados['sobrenome'];
             $usuario->funcionario->pessoa->save();
+            UsuarioLog::newLog('Alterado dados de usuário.', $usuario->id);
             $success = true;
         }
         $this->layout->content = View::make('geral.meusdados')->with('dados',$dados)->withErrors($validator)->with('success',$success)->with('senha',$senha);

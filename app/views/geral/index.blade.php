@@ -53,7 +53,7 @@
                                                 $naotem = false;
                                             ?>
                                             <tr>
-                                                <td> {{ $aniversariante->nome }} {{ $aniversariante->sobrenome }}</td>
+                                                <td> {{ $aniversariante->nome.' '.$aniversariante->sobrenome }}</td>
                                                 <td> {{ $aniversario->format('d'); }} </td>
                                             </tr>
                                         @endif

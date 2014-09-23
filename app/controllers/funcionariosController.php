@@ -16,56 +16,136 @@ Class funcionariosController extends \BaseController
     
     function alterar($id)
     {
-        $funcionarios = Funcionario::paginate(10);
+        $funcionario = Funcionario::find($id);
         $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        $dados = [
+            'nome' => $funcionario->pessoa->nome,
+            'sobrenome' => $funcionario->pessoa->sobrenome,
+            'datanascimento' => $funcionario->pessoa->getFormatedDate('datanascimento','d/m/Y'),
+            'cpf' => $funcionario->cpf,
+            'rg' => $funcionario->rg,
+            'salario' => $funcionario->salario,
+            'funcao' => $funcionario->funcao_id
+        ];
+        foreach($funcoes as $f){
+            $arrfuncoes[$f->id] = $f->nome;
+        }
+        
+        $this->layout->content = View::make('funcionarios.alterar')
+                ->with('funcoes', $arrfuncoes)
+                ->with('dados', $dados);
+        
     }
     
     function salvaralterar($id)
     {
-        $funcionarios = Funcionario::paginate(10);
+        $post = Input::all();
         $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        foreach($funcoes as $f){
+            $arrfuncoes[$f->id] = $f->nome;
+        }
+        $rules = array_merge(Pessoa::getRules(),  Funcionario::getRules());
+        $validator = Validator::make($post, $rules);
+        $success = false;
+        if(!$validator->fails()){
+            $funcionario = Funcionario::find($id);
+            $pessoa = Pessoa::find($funcionario->pessoa_id);
+            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
+            $pessoa->nome = $post['nome'];
+            $pessoa->sobrenome = $post['sobrenome'];
+            $pessoa->datanascimento = $nascimento->format('Y/m/d');
+            $pessoa->save();
+            $funcionario->pessoa_id = $pessoa->id;
+            $funcionario->cpf = $post['cpf'];
+            $funcionario->rg = $post['rg'];
+            $funcionario->salario = $post['salario'];
+            $funcionario->funcao_id = $post['funcao'];
+            $funcionario->save();
+            $success = true;
+        }
+        $this->layout->content = View::make('funcionarios.alterar')
+                ->with('funcoes', $arrfuncoes)
+                ->with('dados', $post)
+                ->with('success',$success)
+                ->withErrors($validator);
     }
     
     function visualizar($id)
     {
-        $funcionarios = Funcionario::paginate(10);
-        $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        $funcionario = Funcionario::find($id);
+        $dados = [
+            'nome' => $funcionario->pessoa->nome,
+            'sobrenome' => $funcionario->pessoa->sobrenome,
+            'datanascimento' => $funcionario->pessoa->getFormatedDate('datanascimento','d/m/Y'),
+            'cpf' => $funcionario->cpf,
+            'rg' => $funcionario->rg,
+            'salario' => $funcionario->salario,
+            'funcao' => $funcionario->funcao->nome
+        ];
+        
+        $this->layout->content = View::make('funcionarios.visualizar')
+                ->with('dados', $dados);
     }
     
     function deletar($id)
     {
-        $funcionarios = Funcionario::paginate(10);
-        $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return $this->index();
     }
     
     function novo()
     {
-        $funcionarios = Funcionario::paginate(10);
         $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        $dados = [
+            'nome' => '',
+            'sobrenome' => '',
+            'datanascimento' => '',
+            'cpf' => '',
+            'rg' => '',
+            'salario' => '',
+            'funcao' => ''
+        ];
+        foreach($funcoes as $f){
+            $arrfuncoes[$f->id] = $f->nome;
+        }
+        
+        $this->layout->content = View::make('funcionarios.novo')
+                ->with('funcoes', $arrfuncoes)
+                ->with('dados', $dados);
     }
     
     function salvarnovo()
     {
-        $funcionarios = Funcionario::paginate(10);
+        $post = Input::all();
         $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
+        foreach($funcoes as $f){
+            $arrfuncoes[$f->id] = $f->nome;
+        }
+        $rules = array_merge(Pessoa::getRules(),  Funcionario::getRules());
+        $validator = Validator::make($post, $rules);
+        $success = false;
+        if(!$validator->fails()){
+            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
+            $funcionario = new Funcionario;
+            $pessoa = new Pessoa;
+            $pessoa->nome = $post['nome'];
+            $pessoa->sobrenome = $post['sobrenome'];
+            $pessoa->datanascimento = $nascimento->format('Y/m/d');
+            $pessoa->save();
+            $funcionario->pessoa_id = $pessoa->id;
+            $funcionario->cpf = $post['cpf'];
+            $funcionario->rg = $post['rg'];
+            $funcionario->salario = $post['salario'];
+            $funcionario->funcao_id = $post['funcao'];
+            $funcionario->save();
+            $success = true;
+        }
+        $this->layout->content = View::make('funcionarios.novo')
+                ->with('funcoes', $arrfuncoes)
+                ->with('dados', $post)
+                ->with('success',$success)
+                ->withErrors($validator);
     }
     
     function novafuncao()

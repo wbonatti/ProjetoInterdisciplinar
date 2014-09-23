@@ -34,6 +34,15 @@ Class Autenticacao
     public static function getUsuarioLogado(){
         return Session::get('usuario');
     }
+    
+    /**
+     * Retorna o id do usuário logado no sistema
+     * @return [object]
+     */
+    public static function UsuarioLogadoObject(){
+        $usuario = Session::get('usuario');
+        return Usuario::find($usuario['id']);
+    }
 
 
     /**

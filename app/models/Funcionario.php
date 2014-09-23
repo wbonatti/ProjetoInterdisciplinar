@@ -19,7 +19,11 @@ class Funcionario extends BaseModel {
     
     public static function getRules(){
         return [
-
+            'cpf'=>'required|numeric',
+            'rg'=>'required|numeric',
+            'salario'=>'required|numeric',
+            'funcao'=>'required|numeric'
         ];;
     }
+    
 }

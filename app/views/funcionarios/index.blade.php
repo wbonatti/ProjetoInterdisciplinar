@@ -68,7 +68,7 @@
                                     @foreach($funcionarios as $f)
                                         <tr>
                                             <td data-title='#'>{{$f->id}}</td>
-                                            <td data-title='Nome'>{{$f->pessoa->nome.''.$f->pessoa->sobrenome}}</td>
+                                            <td data-title='Nome'>{{$f->pessoa->nome.' '.$f->pessoa->sobrenome}}</td>
                                             <td data-title='Função'>{{$f->funcao->nome}}</td>
                                             <td data-title='Ações' class="action-buttons">
                                                 <a href="/funcionarios/visualizar/{{$f->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
