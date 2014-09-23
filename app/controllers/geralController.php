@@ -36,7 +36,7 @@ Class geralController extends \BaseController
         $dados['sobrenome'] = $usuario->funcionario->pessoa->sobrenome;
         $dados['cpf'] = $usuario->funcionario->cpf;
         $dados['rg'] = $usuario->funcionario->rg;
-        $dados['nascimento'] = $usuario->funcionario->pessoa->getFormatedDate('datanascimento','d/m/Y');
+        $dados['datanascimento'] = $usuario->funcionario->pessoa->getFormatedDate('datanascimento','d/m/Y');
         $dados['salario'] = $usuario->funcionario->salario;
         $this->layout->content = View::make('geral.meusdados')->with('dados',$dados);
     }
@@ -49,7 +49,7 @@ Class geralController extends \BaseController
         $dados = [  'email' => $usuario->email,
                     'nome' => $post['nome'],
                     'sobrenome' => $post['sobrenome'],
-                    'nascimento' => $post['nascimento'],
+                    'datanascimento' => $post['datanascimento'],
                     'cpf' => $usuario->funcionario->cpf,
                     'rg' => $usuario->funcionario->rg,
                     'salario' => $usuario->funcionario->salario
@@ -61,7 +61,7 @@ Class geralController extends \BaseController
         $success = false;
         $validator = Validator::make($post, Pessoa::getRules());
         if(!$validator->fails() && $senha){
-            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['nascimento']);
+            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
             $usuario->funcionario->pessoa->datanascimento = $nascimento->format('Y/m/d');
             $usuario->funcionario->pessoa->nome = $dados['nome'];
             $usuario->funcionario->pessoa->sobrenome = $dados['sobrenome'];

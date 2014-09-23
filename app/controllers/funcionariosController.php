@@ -48,6 +48,7 @@ Class funcionariosController extends \BaseController
         $validator = Validator::make($post, $rules);
         $success = false;
         if(!$validator->fails()){
+            $usuario = Autenticacao::UsuarioLogadoObject();
             $funcionario = Funcionario::find($id);
             $pessoa = Pessoa::find($funcionario->pessoa_id);
             $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
@@ -61,6 +62,7 @@ Class funcionariosController extends \BaseController
             $funcionario->salario = $post['salario'];
             $funcionario->funcao_id = $post['funcao'];
             $funcionario->save();
+            UsuarioLog::newLog("Alterado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
             $success = true;
         }
         $this->layout->content = View::make('funcionarios.alterar')
@@ -90,8 +92,14 @@ Class funcionariosController extends \BaseController
     function deletar($id)
     {
         $funcionario = Funcionario::find($id);
-        $funcionario->delete();
-        return $this->index();
+        if(isset($funcionario)){
+            $usuario = Autenticacao::UsuarioLogadoObject();
+            $pessoa = Pessoa::find($funcionario->pessoa->id);
+            UsuarioLog::newLog("Deletado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
+            $funcionario->delete();
+            $pessoa->delete();
+        }
+        return Redirect::to('/funcionarios');
     }
     
     function novo()
@@ -126,6 +134,7 @@ Class funcionariosController extends \BaseController
         $validator = Validator::make($post, $rules);
         $success = false;
         if(!$validator->fails()){
+            $usuario = Autenticacao::UsuarioLogadoObject();
             $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
             $funcionario = new Funcionario;
             $pessoa = new Pessoa;
@@ -139,6 +148,7 @@ Class funcionariosController extends \BaseController
             $funcionario->salario = $post['salario'];
             $funcionario->funcao_id = $post['funcao'];
             $funcionario->save();
+            UsuarioLog::newLog("Criado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
             $success = true;
         }
         $this->layout->content = View::make('funcionarios.novo')
