@@ -1,6 +1,12 @@
 /*------------------------------------------------------------------
 Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
+.control-label{
+    font-weight: bolder;
+}
+.control-p{
+    margin-top: 3px;
+}
 .form-horizontal{
     margin-bottom: 30px;
 }

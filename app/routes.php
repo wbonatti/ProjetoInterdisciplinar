@@ -28,8 +28,16 @@ else{
         Route::get('/deletar/{x}','funcionariosController@deletar');
         Route::get('/novo','funcionariosController@novo');
         Route::post('/novo','funcionariosController@salvarnovo');
-        Route::get('/funcao','funcionariosController@novafuncao');
-        Route::post('/funcao','funcionariosController@salvarfuncao');
+    });
+    
+    
+    Route::group(array('prefix' => 'funcao'), function(){
+        Route::get('/alterar/{x}','funcaoController@alterar');
+        Route::post('/alterar/{x}','funcaoController@salvaralterar');
+        Route::get('/visualizar/{x}','funcaoController@visualizar');
+        Route::get('/deletar/{x}','funcaoController@deletar');
+        Route::get('/novo','funcaoController@novo');
+        Route::post('/novo','funcaoController@salvarnovo');
     });
     
     Route::group(array('prefix' => 'alunos'), function(){

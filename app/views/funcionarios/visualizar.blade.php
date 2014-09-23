@@ -18,51 +18,51 @@
                                 <div id="edit-profile" class="form-horizontal">
                                     <fieldset>
                                         <div class="control-group">
-                                            {{Form::label('nome','Nome:', ['class'=>'control-label'])}}
+                                            <label class="control-label">Nome:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['nome'] }}</p>
+                                                <p class="control-p">{{ $dados['nome'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('sobrenome','Sobrenome:', ['class'=>'control-label'])}}
+                                            <label class="control-label">Sobrenome:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['sobrenome']; }}</p>
+                                                <p class="control-p">{{ $dados['sobrenome']; }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('nascimento','Data de nascimento:', ['class'=>'control-label'])}}
+                                            <label class="control-label">Data de nascimento:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['datanascimento'] }}</p>
+                                                <p class="control-p">{{ $dados['datanascimento'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('cpf','CPF:', ['class'=>'control-label'])}}
+                                            <label class="control-label">CPF:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['cpf'] }}</p>
+                                                <p class="control-p">{{ $dados['cpf'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('rg','RG:', ['class'=>'control-label'])}}
+                                            <label class="control-label">RG:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['rg'] }}</p>
+                                                <p class="control-p">{{ $dados['rg'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('salario','Salário:', ['class'=>'control-label'])}}
+                                            <label class="control-label">Salário:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['salario'] }}</p>
+                                                <p class="control-p">{{ $dados['salario'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('funcao','Função:', ['class'=>'control-label'])}}
+                                            <label class="control-label">Função:</label>
                                             <div class="controls">
-                                                <p>{{ $dados['funcao'] }}</p>
+                                                <p class="control-p">{{ $dados['funcao'] }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         

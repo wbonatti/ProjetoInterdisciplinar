@@ -15,7 +15,7 @@
                                     <i class="shortcut-icon icon-user"></i>
                                     <span class="shortcut-label">Novo Funcionário</span> 
                                 </a> 
-                                <a href="/funcionarios/funcao" class="shortcut">
+                                <a href="/funcao/novo" class="shortcut">
                                     <i class="shortcut-icon icon-group"></i>
                                     <span class="shortcut-label">Nova Função</span> 
                                 </a>
@@ -33,6 +33,7 @@
                                         <th> # </th>
                                         <th> Nome </th>
                                         <th> Usuários </th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +42,11 @@
                                             <td data-title='#'>{{$f->id}}</td>
                                             <td data-title='Nome'>{{$f->nome}}</td>
                                             <td data-title='Usuários'>{{count($f->funcionarios)}}</td>
+                                            <td data-title='Ações' class="action-buttons">
+                                                <a href="/funcao/visualizar/{{$f->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/funcao/alterar/{{$f->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/funcao/deletar/{{$f->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

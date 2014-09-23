@@ -9,7 +9,7 @@ Class geralController extends \BaseController
     {
         $usuario = Autenticacao::UsuarioLogadoObject();
         $aniversariantes = Pessoa::whereRaw('month(datanascimento) = month(now())')->get();
-        $logs = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('data DESC')->limit(10)->get();
+        $logs = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('data DESC')->limit(5)->get();
         $numeroAlunos = Aluno::count();
         $numeroFuncionario = Funcionario::count();
         $numeroPessoa = Pessoa::count();

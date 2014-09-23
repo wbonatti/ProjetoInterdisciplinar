@@ -10,7 +10,7 @@ class Funcao extends BaseModel {
     }        
     public static function getRules(){
         return [
-
+            'nome' => 'required'
         ];
     }
 }

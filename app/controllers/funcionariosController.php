@@ -17,6 +17,9 @@ Class funcionariosController extends \BaseController
     function alterar($id)
     {
         $funcionario = Funcionario::find($id);
+        if(!isset($funcionario)){
+            return Redirect::to('/funcionarios');
+        }
         $funcoes = Funcao::all();
         $dados = [
             'nome' => $funcionario->pessoa->nome,
@@ -37,44 +40,12 @@ Class funcionariosController extends \BaseController
         
     }
     
-    function salvaralterar($id)
-    {
-        $post = Input::all();
-        $funcoes = Funcao::all();
-        foreach($funcoes as $f){
-            $arrfuncoes[$f->id] = $f->nome;
-        }
-        $rules = array_merge(Pessoa::getRules(),  Funcionario::getRules());
-        $validator = Validator::make($post, $rules);
-        $success = false;
-        if(!$validator->fails()){
-            $usuario = Autenticacao::UsuarioLogadoObject();
-            $funcionario = Funcionario::find($id);
-            $pessoa = Pessoa::find($funcionario->pessoa_id);
-            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
-            $pessoa->nome = $post['nome'];
-            $pessoa->sobrenome = $post['sobrenome'];
-            $pessoa->datanascimento = $nascimento->format('Y/m/d');
-            $pessoa->save();
-            $funcionario->pessoa_id = $pessoa->id;
-            $funcionario->cpf = $post['cpf'];
-            $funcionario->rg = $post['rg'];
-            $funcionario->salario = $post['salario'];
-            $funcionario->funcao_id = $post['funcao'];
-            $funcionario->save();
-            UsuarioLog::newLog("Alterado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
-            $success = true;
-        }
-        $this->layout->content = View::make('funcionarios.alterar')
-                ->with('funcoes', $arrfuncoes)
-                ->with('dados', $post)
-                ->with('success',$success)
-                ->withErrors($validator);
-    }
-    
     function visualizar($id)
     {
         $funcionario = Funcionario::find($id);
+        if(!isset($funcionario)){
+            return Redirect::to('/funcionarios');
+        }
         $dados = [
             'nome' => $funcionario->pessoa->nome,
             'sobrenome' => $funcionario->pessoa->sobrenome,
@@ -122,6 +93,45 @@ Class funcionariosController extends \BaseController
                 ->with('funcoes', $arrfuncoes)
                 ->with('dados', $dados);
     }
+
+    
+    function salvaralterar($id)
+    {
+        $funcionario = Funcionario::find($id);
+        if(!isset($funcionario)){
+            return Redirect::to('/funcionarios');
+        }
+        $post = Input::all();
+        $funcoes = Funcao::all();
+        foreach($funcoes as $f){
+            $arrfuncoes[$f->id] = $f->nome;
+        }
+        $rules = array_merge(Pessoa::getRules(),  Funcionario::getRules());
+        $validator = Validator::make($post, $rules);
+        $success = false;
+        if(!$validator->fails()){
+            $usuario = Autenticacao::UsuarioLogadoObject();
+            $pessoa = Pessoa::find($funcionario->pessoa_id);
+            $nascimento = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimento']);
+            $pessoa->nome = $post['nome'];
+            $pessoa->sobrenome = $post['sobrenome'];
+            $pessoa->datanascimento = $nascimento->format('Y/m/d');
+            $pessoa->save();
+            $funcionario->pessoa_id = $pessoa->id;
+            $funcionario->cpf = $post['cpf'];
+            $funcionario->rg = $post['rg'];
+            $funcionario->salario = $post['salario'];
+            $funcionario->funcao_id = $post['funcao'];
+            $funcionario->save();
+            UsuarioLog::newLog("Alterado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
+            $success = true;
+        }
+        $this->layout->content = View::make('funcionarios.alterar')
+                ->with('funcoes', $arrfuncoes)
+                ->with('dados', $post)
+                ->with('success',$success)
+                ->withErrors($validator);
+    }
     
     function salvarnovo()
     {
@@ -156,23 +166,5 @@ Class funcionariosController extends \BaseController
                 ->with('dados', $post)
                 ->with('success',$success)
                 ->withErrors($validator);
-    }
-    
-    function novafuncao()
-    {
-        $funcionarios = Funcionario::paginate(10);
-        $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
-    }
-    
-    function salvarfuncao()
-    {
-        $funcionarios = Funcionario::paginate(10);
-        $funcoes = Funcao::all();
-        $this->layout->content = View::make('funcionarios.index')
-                ->with('funcionarios', $funcionarios)
-                ->with('funcoes', $funcoes);
     }
 }
