@@ -159,7 +159,7 @@ Class funcionariosController extends \BaseController
             $funcionario->salario = $post['salario'];
             $funcionario->funcao_id = $post['funcao'];
             $funcionario->save();
-            UsuarioLog::newLog("Criado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
+            UsuarioLog::newLog("Criado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->sobrenome.".", $usuario->id);
             $success = true;
         }
         $this->layout->content = View::make('funcionarios.novo')
