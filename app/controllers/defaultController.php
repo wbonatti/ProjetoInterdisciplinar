@@ -14,15 +14,17 @@ Class defaultController extends \BaseController
     
     function autenticar()
     {
-        $erro = ' ';
+        $errologin = ' ';
         $rules = Usuario::getRules();
         
         $validator = Validator::make(Input::all(), $rules);
         
-        if (!$validator->fails()):
-            if(Autenticacao::efetuaLogin(Input::all()) == true) return Redirect::to('/');
-            else $erro = Autenticacao::efetuaLogin(Input::all());
-        endif;
-        $this->layout->content = View::make('default.login')->withErrors($validator)->withInput(Input::except('senha'))->with('erro', $erro);
+        if (!$validator->fails()){
+            $errologin = Autenticacao::efetuaLogin(Input::all());
+            if(!$errologin){
+                return Redirect::to('/');
+            }
+        }
+        $this->layout->content = View::make('default.login')->withErrors($validator)->withInput(Input::except('senha'))->with('erro', $errologin);
     }
 }

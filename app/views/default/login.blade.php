@@ -1,3 +1,10 @@
+
+@if(isset($erro))
+    <div class="alert alert-danger alert-block text-center">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>{{ $erro }}</h4>
+    </div>
+@endif
 <div class="account-container">
 	<div class="content clearfix">
         {{Form::open(array('action' => 'defaultController@autenticar', 'method' => 'post'))}}
@@ -12,11 +19,7 @@
                 <div class="field">
                     {{Form::label('senha','Senha:', [])}}
                     {{Form::password('senha', ['autocomplete'=>'off', 'class'=>'login password-field', 'id'=>'senha', 'placeholder' => 'Senha'])}}
-                    <p class="text-danger">{{ $errors->first('senha'); }}
-                    @if(!empty($erro))
-                        {{ $erro }}
-                    @endif
-                    </p>
+                    <p class="text-danger">{{ $errors->first('senha'); }}</p>
                 </div>
             </div>
             <div class="login-actions">

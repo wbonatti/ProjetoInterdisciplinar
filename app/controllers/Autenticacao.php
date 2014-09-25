@@ -9,14 +9,14 @@ Class Autenticacao
      * @return boolean
      */
     public static function efetuaLogin($post){
-        $usuario = Usuario::where('email', '=', $post['email'])->where('senha', '=', $post['senha'])->first();
+        $usuario = Usuario::where('email','=', $post['email'])->where('senha','=', $post['senha'])->first();
         if(isset($usuario->id)){
             UsuarioLog::newLog('Efetuado login como '.$post['email'], $usuario->id);
             $usuario = [ 'id'=>$usuario->id, 'email'=>$usuario->email];
             Session::put('usuario', $usuario);
-            return true;
+            return false;
         }
-        return 'Usuário não encontrado.';
+        return "Usuário ou senha inválidos.";
     }
     
     /**

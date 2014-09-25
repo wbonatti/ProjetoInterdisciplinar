@@ -76,6 +76,7 @@ Class funcionariosController extends \BaseController
     function novo()
     {
         $funcoes = Funcao::all();
+
         $dados = [
             'nome' => '',
             'sobrenome' => '',
