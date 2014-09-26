@@ -71,7 +71,6 @@
                 </div>
                 <!-- /span6 --> 
                 <div class="span6">
-                    <!-- /widget -->
                     <div class="widget">
                         <div class="widget-header"> <i class="icon-signal"></i>
                             <h3>Pessoas Cadastradas </h3>
@@ -83,9 +82,9 @@
                             </div>
                             <!-- /area-chart --> 
                             <hr>
-                            <p class="text-danger"><a class="btn btn-danger"></a> <b>Alunos:</b> {{$numeroAluno}} ({{$percentAluno }}%)</p>
-                            <p class="text-success"><a class="btn btn-success"></a> <b>Funcionários:</b> {{$numeroFuncionario}} ({{$percentFuncionario}}%)</p>
-                            <p class="text-info"><a class="btn btn-info"></a> <b>Outros:</b> {{$numeroOutro}} ({{$percentOutro}}%) </p>
+                            <p class="text-success"><i class="icon-adjust"></i> <b>Funcionários:</b> {{$numeroFuncionario}} ({{number_format($percentFuncionario, 2, '.', '')}}%)</p>
+                            <p class="text-info"><i class="icon-adjust"></i> <b>Alunos:</b> {{$numeroAluno}} ({{number_format($percentAluno, 2, '.', '') }}%)</p>
+                            <p class="text-danger"><i class="icon-adjust"></i> <b>Outros:</b> {{$numeroOutro}} ({{number_format($percentOutro, 2, '.', '')}}%) </p>
                             <p><b>Total:</b> {{$numeroPessoa}} pessoas cadastradas.</p>
                         </div>
                         <!-- /widget-content --> 
@@ -100,14 +99,8 @@
     <!-- /main-inner --> 
 </div>
 
-<script>
+<script type="text/javascript">
     var graficoData = [
-				{
-				    value: {{$numeroAluno}},
-				    color: "#db3325",
-                                    highlight: "#FD5547",
-                                    label: 'Alunos'
-				},
 				{
 				    value: {{$numeroFuncionario}},
 				    color: "#7eb216",
@@ -115,9 +108,15 @@
                                     label: 'Funcionários'
 				},
 				{
-				    value: {{$numeroOutro}},
+				    value: {{$numeroAluno}},
 				    color: "#4eb2d5",
                                     highlight: "#70D4F7",
+                                    label: 'Alunos'
+				},
+				{
+				    value: {{$numeroOutro}},
+				    color: "#db3325",
+                                    highlight: "#FD5547",
                                     label: 'Outros'
 				}
 			];
