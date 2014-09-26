@@ -239,13 +239,13 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`aluno_disciplina` (
   CONSTRAINT `fk_aluno_disciplina_aluno1`
     FOREIGN KEY (`aluno_id`)
     REFERENCES `Intranet`.`aluno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_aluno_disciplina_disciplina1`
     FOREIGN KEY (`disciplina_id`)
     REFERENCES `Intranet`.`disciplina` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

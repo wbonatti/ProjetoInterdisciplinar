@@ -179,12 +179,22 @@ Class alunosController extends \BaseController
         $aluno = Aluno::find($id);
         if(isset($aluno)){
             $usuario = Autenticacao::UsuarioLogadoObject();
+            if(isset($aluno->responsavel->id)){
+                $pessoa = Pessoa::find($aluno->responsavel->pessoa_id);
+                $pessoa->delete();
+            }
             $pessoa = Pessoa::find($aluno->pessoa->id);
             UsuarioLog::newLog("Deletado o aluno ".$aluno->id.": ".$aluno->pessoa->nome." ".$aluno->pessoa->nome.".", $usuario->id);
-            $aluno->delete();
             $pessoa->delete();
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Sucesso!')
+                ->with('tipo', 'alert-success')
+                ->with('msg','Aluno deletado com sucesso!');
+            $this->index();
         }
-        return Redirect::to('/alunos');
+        else{
+            return Redirect::to('/alunos');
+        }
     }
     
     function visualizar($id)

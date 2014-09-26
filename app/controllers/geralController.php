@@ -14,6 +14,19 @@ Class geralController extends \BaseController
         $numeroFuncionario = Funcionario::count();
         $numeroPessoa = Pessoa::count();
         $numeroOutro = $numeroPessoa - $numeroAlunos - $numeroFuncionario;
+        $percentAlunos = $numeroAlunos;
+        $percentFuncionario = $numeroFuncionario;
+        $percentOutro = $numeroOutro;
+        if($percentAlunos != 0){
+            $percentAlunos = ($numeroAlunos / $numeroPessoa) * 100;
+        }
+        if($percentFuncionario != 0){
+            $percentFuncionario = ($numeroFuncionario / $numeroPessoa) * 100;
+        }
+        if($percentOutro != 0){
+            $percentOutro = ($numeroOutro / $numeroPessoa) * 100;
+        }
+        
         $mes = Carbon\Carbon::now()->formatLocalized('%B');
         $this->layout->content = View::make('geral.index')
         ->with([
@@ -21,8 +34,11 @@ Class geralController extends \BaseController
             'mes' => $mes,
             'logs' => $logs,
             'numeroAluno' => $numeroAlunos,
+            'percentAluno' => $percentAlunos,
             'numeroFuncionario' => $numeroFuncionario,
+            'percentFuncionario' => $percentFuncionario,
             'numeroOutro' => $numeroOutro,
+            'percentOutro' => $percentOutro,
             'numeroPessoa' => $numeroPessoa
         ]);
     }

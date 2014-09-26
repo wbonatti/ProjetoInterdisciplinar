@@ -73,14 +73,11 @@ Class funcionariosController extends \BaseController
                 ->with('titulo', 'Sucesso!')
                 ->with('tipo', 'alert-success')
                 ->with('msg','Funcionário deletado com sucesso!');
+            $this->index();
         }
         else{
-            $this->layout->error = View::make('default.acao')
-                    ->with('titulo', 'Erro!')
-                ->with('tipo', 'alert-danger')
-                    ->with('msg','Esse funcionário não existe!');
+            return Redirect::to('/funcionarios');
         }
-        $this->index();
     }
     
     function novo()

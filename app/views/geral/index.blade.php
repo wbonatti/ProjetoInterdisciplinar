@@ -83,9 +83,9 @@
                             </div>
                             <!-- /area-chart --> 
                             <hr>
-                            <p class="text-danger"><a class="btn btn-danger"></a> <b>Alunos:</b> {{$numeroAluno}} ({{$numeroPessoa / $numeroAluno * 10}}%)</p>
-                            <p class="text-success"><a class="btn btn-success"></a> <b>Funcionários:</b> {{$numeroFuncionario}} ({{$numeroPessoa / $numeroFuncionario * 10}}%)</p>
-                            <p class="text-info"><a class="btn btn-info"></a> <b>Outros:</b> {{$numeroOutro}} ({{$numeroPessoa / $numeroOutro * 10}}%) </p>
+                            <p class="text-danger"><a class="btn btn-danger"></a> <b>Alunos:</b> {{$numeroAluno}} ({{$percentAluno }}%)</p>
+                            <p class="text-success"><a class="btn btn-success"></a> <b>Funcionários:</b> {{$numeroFuncionario}} ({{$percentFuncionario}}%)</p>
+                            <p class="text-info"><a class="btn btn-info"></a> <b>Outros:</b> {{$numeroOutro}} ({{$percentOutro}}%) </p>
                             <p><b>Total:</b> {{$numeroPessoa}} pessoas cadastradas.</p>
                         </div>
                         <!-- /widget-content --> 
