@@ -8,7 +8,7 @@
                     <div class="widget widget-table action-table">
                         <div class="widget-header">
                             {{ Form::open(array('method' => 'GET', 'style'=>'margin-top: 3px; margin-left: 5px;')) }}
-                                {{Form::select('filtro', $usuarios, '', array('style'=>'margin-left: 10px;width: 65%;'));}}
+                                {{Form::select('filtro', $usuarios, $dados['filtro'], array('style'=>'margin-left: 10px;width: 65%;'));}}
                                 {{Form::submit('Filtrar', array('class'=>'pull-right','style'=>'margin-right: 10px; margin-top: 3px'));}}
                             {{ Form::close() }}
                         </div>
@@ -35,6 +35,11 @@
                                             <td data-title="Data"> {{ $data->format('d/m/Y H:i:s') }} </td>
                                         </tr>
                                     @endforeach
+                                    @if(count($logs) < 1)
+                                        <tr>
+                                            <td class="warning text-center" colspan="3"> Esse usuário ainda não possui nenhum registro. </td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">

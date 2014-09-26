@@ -9,6 +9,9 @@ class Usuario extends BaseModel {
     public function funcionario(){
         return $this->BelongsTo('Funcionario');
     }
+    public function logs(){
+        return $this->HasMany('UsuarioLog');
+    }
     public function pessoa(){
         return $this->BelongsTo('Pessoa');
     }

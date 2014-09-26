@@ -5,6 +5,9 @@ class UsuarioLog extends BaseModel {
     protected $table      = 'log';
     protected $fillable = array('id', 'descricao','data', 'usuario_id');
     
+    public function usuario(){
+        return $this->BelongsTo('Usuario');
+    }
     public static function newLog($msg, $usuario_id){
         $log = new UsuarioLog();
         $log->descricao = $msg;
