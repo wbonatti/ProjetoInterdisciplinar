@@ -9,6 +9,9 @@ class Aluno extends BaseModel {
         return $this->BelongsTo('Pessoa');
     }
     
+    public function notas(){
+        return $this->HasMany('Nota');
+    }
     public function responsavel(){
         return $this->HasOne('Responsavel');
     }

@@ -69,8 +69,18 @@ Class funcionariosController extends \BaseController
             UsuarioLog::newLog("Deletado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->nome.".", $usuario->id);
             $funcionario->delete();
             $pessoa->delete();
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Sucesso!')
+                ->with('tipo', 'alert-success')
+                ->with('msg','Funcionário deletado com sucesso!');
         }
-        return Redirect::to('/funcionarios');
+        else{
+            $this->layout->error = View::make('default.acao')
+                    ->with('titulo', 'Erro!')
+                ->with('tipo', 'alert-danger')
+                    ->with('msg','Esse funcionário não existe!');
+        }
+        $this->index();
     }
     
     function novo()
@@ -159,6 +169,15 @@ Class funcionariosController extends \BaseController
             $funcionario->salario = $post['salario'];
             $funcionario->funcao_id = $post['funcao'];
             $funcionario->save();
+            $post = [
+                'nome' => '',
+                'sobrenome' => '',
+                'datanascimento' => '',
+                'cpf' => '',
+                'rg' => '',
+                'salario' => '',
+                'funcao' => ''
+            ];
             UsuarioLog::newLog("Criado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->sobrenome.".", $usuario->id);
             $success = true;
         }

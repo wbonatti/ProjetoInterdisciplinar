@@ -69,6 +69,9 @@ if (!isset($title))
                 </div>
                 <!-- /subnavbar-inner --> 
             </div>
+            @if(isset($error))
+                {{ $error }}
+            @endif
             {{ $content }}
         </div>
         <footer>

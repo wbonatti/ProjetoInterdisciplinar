@@ -14,7 +14,7 @@ Class defaultController extends \BaseController
     
     function autenticar()
     {
-        $errologin = ' ';
+        $errologin = null;
         $rules = Usuario::getRules();
         
         $validator = Validator::make(Input::all(), $rules);

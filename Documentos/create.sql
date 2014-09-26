@@ -45,15 +45,15 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`funcionario` (
   `rg` VARCHAR(128) NULL,
   `salario` FLOAT NULL,
   `pessoa_id` INT NOT NULL,
-  `funcao_id` INT NOT NULL,
+  `funcao_id` INT NULL,
   PRIMARY KEY (`id`, `pessoa_id`),
   INDEX `fk_funcionario_pessoa1_idx` (`pessoa_id` ASC),
   INDEX `fk_funcionario_funcao1_idx` (`funcao_id` ASC),
   CONSTRAINT `fk_funcionario_pessoa1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `Intranet`.`pessoa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_funcionario_funcao1`
     FOREIGN KEY (`funcao_id`)
     REFERENCES `Intranet`.`funcao` (`id`)
@@ -86,13 +86,13 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`usuario` (
   `funcionario_id` INT NOT NULL,
   `categoria_id` INT NOT NULL,
   PRIMARY KEY (`id`, `funcionario_id`),
-  INDEX `fk_usuario_funcionario1_idx` (`funcionario_id` ASC),
   INDEX `fk_usuario_categoria1_idx` (`categoria_id` ASC),
+  INDEX `fk_usuario_funcionario1_idx` (`funcionario_id` ASC),
   CONSTRAINT `fk_usuario_funcionario1`
     FOREIGN KEY (`funcionario_id`)
     REFERENCES `Intranet`.`funcionario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario_categoria1`
     FOREIGN KEY (`categoria_id`)
     REFERENCES `Intranet`.`categoria` (`id`)
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`disciplina` (
   `nome` VARCHAR(128) NULL,
   `turma_id` INT NULL,
   `valor` FLOAT NULL,
-  `funcionario_id` INT NOT NULL,
+  `funcionario_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_DISCIPLINA_TURMA1_idx` (`turma_id` ASC),
   INDEX `fk_disciplina_funcionario1_idx` (`funcionario_id` ASC),
@@ -136,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`disciplina` (
   CONSTRAINT `fk_disciplina_funcionario1`
     FOREIGN KEY (`funcionario_id`)
     REFERENCES `Intranet`.`funcionario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -156,8 +156,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`log` (
   CONSTRAINT `fk_log_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `Intranet`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -174,8 +174,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`aluno` (
   CONSTRAINT `fk_aluno_pessoa1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `Intranet`.`pessoa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -194,13 +194,13 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`responsavel` (
   CONSTRAINT `fk_responsavel_pessoa1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `Intranet`.`pessoa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_responsavel_aluno1`
     FOREIGN KEY (`aluno_id`)
     REFERENCES `Intranet`.`aluno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -219,8 +219,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`contato` (
   CONSTRAINT `fk_contato_pessoa1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `Intranet`.`pessoa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -277,13 +277,13 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`pagamento_funcionario` (
   CONSTRAINT `fk_pagamento_funcionario_financeiro1`
     FOREIGN KEY (`financeiro_id`)
     REFERENCES `Intranet`.`financeiro` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_pagamento_funcionario_funcionario1`
     FOREIGN KEY (`funcionario_id`)
     REFERENCES `Intranet`.`funcionario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -302,11 +302,61 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`pagamento_aluno` (
   CONSTRAINT `fk_pagamento_aluno_financeiro1`
     FOREIGN KEY (`financeiro_id`)
     REFERENCES `Intranet`.`financeiro` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_pagamento_aluno_aluno1`
     FOREIGN KEY (`aluno_id`)
     REFERENCES `Intranet`.`aluno` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Intranet`.`permissao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Intranet`.`permissao` ;
+
+CREATE TABLE IF NOT EXISTS `Intranet`.`permissao` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `tag` VARCHAR(45) NULL,
+  `criar` TINYINT(1) NULL DEFAULT 0,
+  `atualizar` TINYINT(1) NULL DEFAULT 0,
+  `ler` TINYINT(1) NULL DEFAULT 0,
+  `excluir` TINYINT(1) NULL DEFAULT 0,
+  `categoria_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `categoria_id`),
+  INDEX `fk_permissoes_categoria1_idx` (`categoria_id` ASC),
+  CONSTRAINT `fk_permissoes_categoria1`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `Intranet`.`categoria` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Intranet`.`notas`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Intranet`.`notas` ;
+
+CREATE TABLE IF NOT EXISTS `Intranet`.`notas` (
+  `id` INT NOT NULL,
+  `descricao` VARCHAR(45) NULL,
+  `valor` FLOAT NULL,
+  `aluno_id` INT NOT NULL,
+  `disciplina_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `aluno_id`, `disciplina_id`),
+  INDEX `fk_notas_aluno1_idx` (`aluno_id` ASC),
+  INDEX `fk_notas_disciplina1_idx` (`disciplina_id` ASC),
+  CONSTRAINT `fk_notas_aluno1`
+    FOREIGN KEY (`aluno_id`)
+    REFERENCES `Intranet`.`aluno` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_disciplina1`
+    FOREIGN KEY (`disciplina_id`)
+    REFERENCES `Intranet`.`disciplina` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

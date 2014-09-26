@@ -9,6 +9,10 @@ class Categoria extends BaseModel {
     public function usuario(){
         return $this->HasOne('Usuario');
     }
+    
+    public function permissao(){
+        return $this->HasMany('Permissao');
+    }
     public static function getRules(){
         return [
 

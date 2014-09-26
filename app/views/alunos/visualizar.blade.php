@@ -38,7 +38,32 @@
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
-                                        
+                                        @if($dados['temresponsavel'] == '1')
+                                            <hr>
+                                            <div class="control-group">
+                                                <h3>Responsável</h3>				
+                                            </div> <!-- /control-group -->
+                                            <div class="control-group">
+                                                <label class="control-label">Nome:</label>
+                                                <div class="controls">
+                                                    <p class="control-p">{{ $dados['nomeresponsavel'] }}</p>
+                                                </div> <!-- /controls -->				
+                                            </div> <!-- /control-group -->
+
+                                            <div class="control-group">
+                                                <label class="control-label">Sobrenome:</label>
+                                                <div class="controls">
+                                                    <p class="control-p">{{ $dados['sobrenomeresponsavel']; }}</p>
+                                                </div> <!-- /controls -->				
+                                            </div> <!-- /control-group -->
+
+                                            <div class="control-group">
+                                                <label class="control-label">Data de nascimento:</label>
+                                                <div class="controls">
+                                                    <p class="control-p">{{ $dados['datanascimentoresponsavel'] }}</p>
+                                                </div> <!-- /controls -->				
+                                            </div> <!-- /control-group -->
+                                        @endif
                                         
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
