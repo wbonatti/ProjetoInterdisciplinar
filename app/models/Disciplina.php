@@ -9,6 +9,9 @@ class Disciplina extends BaseModel {
     public function notas(){
         return $this->HasMany('Nota');
     }
+    public function alunos(){
+        return $this->HasMany('AlunoDisciplina');
+    }
     
     public static function getRules(){
         return [

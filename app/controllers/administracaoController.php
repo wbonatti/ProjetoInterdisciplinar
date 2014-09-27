@@ -7,6 +7,8 @@ Class administracaoController extends \BaseController
     
     function index()
     {
-        $this->layout->content = View::make('administracao.index');
+        $disciplinas = Disciplina::paginate(5);
+        $turmas = Turma::all();
+        $this->layout->content = View::make('administracao.index')->with('disciplinas', $disciplinas)->with('turmas',$turmas);
     }
 }

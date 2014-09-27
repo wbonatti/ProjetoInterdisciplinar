@@ -37,9 +37,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($usuarios as $u)
+                                        <tr>
+                                            <td data-title='#'>{{$u->id}}</td>
+                                            <td data-title='Email'>{{$u->email}}</td>
+                                            <td data-title='Funcionário'>{{$u->funcionario->pessoa->nome}} {{$u->funcionario->pessoa->sobrenome}}</td>
+                                            <td data-title='Ações' class="action-buttons">
+                                                <a href="/usuario/visualizar/{{$u->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/usuario/alterar/{{$u->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/usuario/deletar/{{$u->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
+                                {{$usuarios->links()}}
                             </div>
                         </div>
                     </div>
@@ -60,6 +73,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($categorias as $c)
+                                        <tr>
+                                            <td data-title='#'>{{$c->id}}</td>
+                                            <td data-title='Email'>{{$c->nome}}</td>
+                                            <td data-title='Ações' class="action-buttons">
+                                                <a href="/categoria/visualizar/{{$c->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/categoria/alterar/{{$c->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/categoria/deletar/{{$c->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">

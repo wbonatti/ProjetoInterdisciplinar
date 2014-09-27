@@ -14,4 +14,9 @@ class BaseModel extends Eloquent {
         $dt = Carbon\Carbon::createFromFormat('Y-m-d', $this->$attr);
         return $dt->format($format);
     }
+    public function formatDateTime($attr, $format) {
+        if(empty($this->$attr)) return null;
+        $dt = Carbon\Carbon::createFromFormat('Y-m-d H:m:s', $this->$attr);
+        return $dt->format($format);
+    }
 }

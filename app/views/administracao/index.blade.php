@@ -41,14 +41,25 @@
                                     <tr>
                                         <th> # </th>
                                         <th> Nome </th>
-                                        <th> Alunos </th>
                                         <th> Disciplinas </th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($turmas as $t)
+                                    <tr>
+                                        <td>{{$t->id}}</td>
+                                        <td>{{$t->nome}}</td>
+                                        <td>{{count($t->disciplinas)}}</td>
+                                        <td data-title='Ações' class="action-buttons">
+                                            <a href="/turma/visualizar/{{$t->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                            <a href="/turma/alterar/{{$t->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                            <a href="/turma/deletar/{{$t->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
-                            </table> 
+                            </table>
                             <div class="widget-header text-right">
                             </div>
                         </div>
@@ -72,9 +83,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($disciplinas as $d)
+                                    <tr>
+                                        <td>{{$d->id}}</td>
+                                        <td>{{$d->nome}}</td>
+                                        <td>{{count($d->alunos)}}</td>
+                                        <td data-title='Ações' class="action-buttons">
+                                            <a href="/disciplina/visualizar/{{$d->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                            <a href="/disciplina/alterar/{{$d->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                            <a href="/disciplina/deletar/{{$d->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
+                                {{$disciplinas->links()}}
                             </div>
                         </div>
                     </div>

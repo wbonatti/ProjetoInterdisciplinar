@@ -7,6 +7,8 @@ Class usuarioController extends \BaseController
     
     function index()
     {
-        $this->layout->content = View::make('usuario.index');
+        $usuarios = Usuario::paginate(10);
+        $categoria = Categoria::all();
+        $this->layout->content = View::make('usuario.index')->with('categorias',$categoria)->with('usuarios',$usuarios);
     }
 }

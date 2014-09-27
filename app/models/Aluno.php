@@ -15,6 +15,9 @@ class Aluno extends BaseModel {
     public function responsavel(){
         return $this->HasOne('Responsavel');
     }
+    public function disciplinas(){
+        return $this->HasMany('AlunoDisciplina');
+    }
     
     public static function getRules(){
         return [

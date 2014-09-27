@@ -21,9 +21,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($mensalidades as $p)
+                                        <tr>
+                                            <td data-title='#'>{{$p->id}}</td>
+                                            <td data-title='Para'>{{Aluno::find($p->aluno_id)->pessoa->nome;}}</td>
+                                            <td data-title='Valor'>{{$p->valor}}</td>
+                                            <td data-title='Data'>{{$p->formatDateTime('data','d/m/Y')}}</td>
+                                            <td data-title='Ações' class="action-buttons">
+                                                <a href="/funcionarios/visualizar/{{$p->pagamento_id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/funcionarios/alterar/{{$p->pagamento_id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/funcionarios/deletar/{{$p->pagamento_id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
+                                <a href="/mensalidades" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
                             </div>
                         </div>
                     </div>
@@ -43,9 +57,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($pagamentos as $p)
+                                        <tr>
+                                            <td data-title='#'>{{$p->id}}</td>
+                                            <td data-title='Para'>{{Funcionario::find($p->funcionario_id)->pessoa->nome;}}</td>
+                                            <td data-title='Valor'>{{$p->valor}}</td>
+                                            <td data-title='Data'>{{$p->formatDateTime('data','d/m/Y')}}</td>
+                                            <td data-title='Ações' class="action-buttons">
+                                                <a href="/funcionarios/visualizar/{{$p->pagamento_id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/funcionarios/alterar/{{$p->pagamento_id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
+                                                <a href="/funcionarios/deletar/{{$p->pagamento_id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
+                                <a href="/pagamentos" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
                             </div>
                         </div>
                     </div>
@@ -68,19 +96,14 @@
                                     <span class="shortcut-label">Registrar Pagamento de Mensalidade</span> 
                                 </a>
                             <hr>
-                                <h4> Mês de Fevereiro </h4>
-                                <br>
                             </div>
                             <div class="area-chart">
                                 <canvas id="area-chart" class="chart-holder"  width="400" height="200" style="margin: 0 -100px;"> </canvas>
                             </div>
                             <!-- /area-chart -->
-                            <p class="text-success"><i class="icon-adjust"></i> <b>Pagamento pago:</b> x (x%)</p>
-                            <p class="text-success"><i class="icon-adjust"></i> <b>Pagamento em atraso:</b> x (x%)</p>
-                            <p class="text-info"><i class="icon-adjust"></i> <b>Mensalidade paga:</b> x (x%)</p>
-                            <p class="text-danger"><i class="icon-adjust"></i> <b>Mensalidade em atraso:</b> x (x%)</p>
-                            <p><b>Saldo efetuado:</b> x</p>
-                            <p><b>Saldo previsto:</b> x</p>
+                            <p class="text-success"><i class="icon-adjust"></i> <b>Total Mensalidades:</b> R$ {{$totalmensalidades}}</p>
+                            <p class="text-danger"><i class="icon-adjust"></i> <b>Total Pagamentos:</b> R$ {{$totalpagamentos}}</p>
+                            <p><b>Saldo:</b> R$ {{$saldo}}</p>
                         </div>
                         <!-- /widget-content --> 
                     </div>
@@ -96,28 +119,16 @@
 <script type="text/javascript">
     var graficoData = [
 				{
-				    value: 20,
+				    value: {{$totalmensalidades}},
 				    color: "#7eb216",
                                     highlight: "#A0D438",
-                                    label: 'Pagamento pago'
+                                    label: 'Total Pagamentos'
 				},
 				{
-				    value: 20,
-				    color: "#4eb2d5",
-                                    highlight: "#70D4F7",
-                                    label: 'Pagamento em atraso'
-				},
-				{
-				    value: 20,
+				    value: {{$totalpagamentos}},
 				    color: "#db3325",
                                     highlight: "#FD5547",
-                                    label: 'Mensalidade paga'
-				},
-				{
-				    value: 40,
-				    color: "#db3325",
-                                    highlight: "#FD5547",
-                                    label: 'Mensalidade em atraso'
+                                    label: 'Total Mensalidades'
 				}
 			];
 

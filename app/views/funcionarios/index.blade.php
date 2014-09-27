@@ -51,6 +51,8 @@
                                     @endforeach
                                 </tbody>
                             </table> 
+                            <div class="widget-header text-right">
+                            </div>
                         </div>
                     </div>
                 </div>
