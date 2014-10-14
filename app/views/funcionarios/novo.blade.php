@@ -21,7 +21,7 @@
                                     @if($success)
                                         <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
-                                            <h4>Successo!</h4>
+                                            <h4>Sucesso!</h4>
                                             Funcionário cadastrado com sucesso.
                                         </div>
                                     @else
