@@ -65,6 +65,26 @@
                                             </div> <!-- /control-group -->
                                         @endif
                                         
+                                        
+                                        @if(empty($arrdisciplinas) || count($arrdisciplinas) < 1)
+                                            <div class="alert alert-warning">
+                                                Você não selecionou nenhuma disciplina
+                                            </div>
+                                        @else
+                                            @foreach($arrdisciplinas as $disciplina)
+                                                <div class="control-group">
+                                                    {{ $disciplina->id }}
+                                                    {{ $disciplina->nome }}
+                                                    @if(isset($disciplina->turma_id))
+                                                        {{ $disciplina->turma->nome }}
+                                                    @else
+                                                        <span class="text-danger">Não vinculado a uma turma</span>
+                                                    @endif
+                                                    {{ $disciplina->valor }}
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                        
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
                                             <a class="btn btn-primary" href='/alunos'>Voltar</a>

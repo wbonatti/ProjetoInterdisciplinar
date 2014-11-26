@@ -8,7 +8,6 @@ class Turma extends BaseModel {
     public function disciplinas(){
         return $this->HasMany('Disciplina');
     }
-    
     public static function getRules(){
         return [
 

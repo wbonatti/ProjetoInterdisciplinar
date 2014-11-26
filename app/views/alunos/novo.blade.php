@@ -109,6 +109,40 @@
                                             
                                         </div>
                                         <div class="clear-footer"></div>
+                                        <div class="control-group">
+                                            <hr>
+                                            <div class="control-group">
+                                                <h3>Disciplinas</h3>
+                                            </div>
+
+                                            <div class="control-group">
+                                                {{Form::label('selectDisciplina','Disciplina:', ['class'=>'control-label'])}}
+                                                <div class="controls">
+                                                    {{Form::select('selectDisciplina',$disciplinas,'', ['autocomplete'=>'off', 'class'=>'span4'])}}
+                                                    <button name="novadisciplina" value="1" class="btn btn-primary"><i class="icon-large icon-plus-sign"> </i> Adicionar</button>
+                                                </div> <!-- /controls -->				
+                                            </div> <!-- /control-group -->
+                                            @if(empty($arrdisciplinas) || count($arrdisciplinas) < 1)
+                                                <div class="alert alert-warning">
+                                                    Você não selecionou nenhuma disciplina
+                                                </div>
+                                            @else
+                                                @foreach($arrdisciplinas as $disciplina)
+                                                    <div class="control-group">
+                                                        {{ $disciplina->id }}
+                                                        {{ $disciplina->nome }}
+                                                        @if(isset($disciplina->turma_id))
+                                                            {{ $disciplina->turma->nome }}
+                                                        @else
+                                                            <span class="text-danger">Não vinculado a uma turma</span>
+                                                        @endif
+                                                        {{ $disciplina->valor }}
+                                                        <input type="hidden" value="{{$disciplina->id}}" name="disciplinasvinculadas[]">
+                                                        <button name="removerdisciplina" value="{{$disciplina->id}}" class="btn btn-danger"><i class="icon-large icon-minus-sign"> </i> Remover Disciplina</button>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                         <div class="form-actions footer-actions">
                                             <button type="submit" class="btn btn-primary">Salvar</button> 
                                             <a class="btn" href='/alunos'>Cancelar</a>
@@ -124,18 +158,4 @@
         </div> <!-- /span8 -->
     </div> <!-- /row -->
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#novoresponsavel a").on('click',function(){
-            $("#novoresponsavel").addClass('hidden');
-            $("#responsavel").removeClass('hidden');
-            $("input[name='temresponsavel']").val('1');
-        });
-        $("#removeresponsavel a").on('click',function(){
-            $("#responsavel").addClass('hidden');
-            $("#novoresponsavel").removeClass('hidden');
-            $("input[name='temresponsavel']").val('0');
-        });
-    });
-</script>
     

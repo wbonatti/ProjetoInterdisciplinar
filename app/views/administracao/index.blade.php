@@ -3,33 +3,6 @@
     <div class="main-inner">
         <div class="container">
             <div class="row">
-                <div class="span12">
-                    <div class="widget">
-                        <div class="widget-header"> <i class="icon-wrench"></i>
-                          <h3>Ações</h3>
-                        </div>
-                        <div class="widget-content">
-                            <div class="shortcuts"> 
-                                <a href="javascript:;" class="shortcut">
-                                    <i class="shortcut-icon icon-book"></i>
-                                    <span class="shortcut-label">Nova Disciplina</span> 
-                                </a>  
-                                <a href="javascript:;" class="shortcut">
-                                    <i class="shortcut-icon icon-bookmark-empty"></i>
-                                    <span class="shortcut-label">Administrar Disciplina</span> 
-                                </a> 
-                                <a href="javascript:;" class="shortcut">
-                                    <i class="shortcut-icon icon-group"></i>
-                                    <span class="shortcut-label">Nova Turma</span> 
-                                </a>  
-                                <a href="javascript:;" class="shortcut">
-                                    <i class="shortcut-icon icon-bookmark"></i>
-                                    <span class="shortcut-label">Administrar Turma</span> 
-                                </a> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="span6">
                     <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-save"></i>
@@ -61,6 +34,7 @@
                                 </tbody>
                             </table>
                             <div class="widget-header text-right">
+                                <a href="/turma/novo" class="btn btn-success btn-small btn-show pull-left btn-ajust" title="Nova Turma"><i class="btn-icon-only icon-plus"> </i> Nova Turma</a>
                             </div>
                         </div>
                     </div>
@@ -98,6 +72,9 @@
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
+                                <div class="widget-header text-right">
+                                    <a href="/disciplina/novo" class="btn btn-success btn-small btn-show pull-left btn-ajust" title="Nova Disciplina"><i class="btn-icon-only icon-plus"> </i> Nova Disciplina</a>
+                                </div>
                                 {{$disciplinas->links()}}
                             </div>
                         </div>

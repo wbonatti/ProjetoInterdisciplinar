@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`funcionario` (
   CONSTRAINT `fk_funcionario_funcao1`
     FOREIGN KEY (`funcao_id`)
     REFERENCES `Intranet`.`funcao` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`usuario` (
   `email` VARCHAR(128) NULL,
   `senha` VARCHAR(128) NULL,
   `funcionario_id` INT NOT NULL,
-  `categoria_id` INT NOT NULL,
+  `categoria_id` INT NULL,
   PRIMARY KEY (`id`, `funcionario_id`),
   INDEX `fk_usuario_categoria1_idx` (`categoria_id` ASC),
   INDEX `fk_usuario_funcionario1_idx` (`funcionario_id` ASC),
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`usuario` (
   CONSTRAINT `fk_usuario_categoria1`
     FOREIGN KEY (`categoria_id`)
     REFERENCES `Intranet`.`categoria` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL)
 ENGINE = InnoDB;
 
 
@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`disciplina` (
   CONSTRAINT `fk_DISCIPLINA_TURMA1`
     FOREIGN KEY (`turma_id`)
     REFERENCES `Intranet`.`turma` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `fk_disciplina_funcionario1`
     FOREIGN KEY (`funcionario_id`)
     REFERENCES `Intranet`.`funcionario` (`id`)
@@ -352,13 +352,13 @@ CREATE TABLE IF NOT EXISTS `Intranet`.`notas` (
   CONSTRAINT `fk_notas_aluno1`
     FOREIGN KEY (`aluno_id`)
     REFERENCES `Intranet`.`aluno` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_notas_disciplina1`
     FOREIGN KEY (`disciplina_id`)
     REFERENCES `Intranet`.`disciplina` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

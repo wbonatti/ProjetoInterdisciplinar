@@ -5,7 +5,14 @@ setlocale(LC_TIME, 'PT-BR');
 // =============================================
 // HOME PAGE ===================================
 // =============================================
+Route::get('ajax/{method}/{att}', function($method, $att) {
+    $ajax = new Ajax();
+    $headers['Content-Type'] = 'application/json';
 
+    if(method_exists($ajax, $method)){
+        return Response::json($ajax->$method($att), 200, $headers);
+    }
+});
 
 
 if(!Autenticacao::verificaLogin()){
@@ -48,6 +55,26 @@ else{
         Route::post('/alterar/{x}','alunosController@salvaralterar');
         Route::get('/visualizar/{x}','alunosController@visualizar');
         Route::get('/deletar/{x}','alunosController@deletar');
+    });
+    
+    Route::group(array('prefix' => 'disciplina'), function(){
+        Route::get('/','administracaoController@index');
+        Route::get('/novo','disciplinaController@novo');
+        Route::post('/novo','disciplinaController@salvarnovo');
+        Route::get('/alterar/{x}','disciplinaController@alterar');
+        Route::post('/alterar/{x}','disciplinaController@salvaralterar');
+        Route::get('/visualizar/{x}','disciplinaController@visualizar');
+        Route::get('/deletar/{x}','disciplinaController@deletar');
+    });
+    
+    Route::group(array('prefix' => 'turma'), function(){
+        Route::get('/','administracaoController@index');
+        Route::get('/novo','turmaController@novo');
+        Route::post('/novo','turmaController@salvarnovo');
+        Route::get('/alterar/{x}','turmaController@alterar');
+        Route::post('/alterar/{x}','turmaController@salvaralterar');
+        Route::get('/visualizar/{x}','turmaController@visualizar');
+        Route::get('/deletar/{x}','turmaController@deletar');
     });
     
     Route::group(array('prefix' => 'administracao'), function(){

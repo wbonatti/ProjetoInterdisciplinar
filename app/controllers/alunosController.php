@@ -21,15 +21,57 @@ Class alunosController extends \BaseController
             'temresponsavel' => '0',
             'nomeresponsavel' => '',
             'sobrenomeresponsavel' => '',
-            'datanascimentoresponsavel' => ''
+            'datanascimentoresponsavel' => '',
+            'numerodisciplinas' => 0
         ];        
+        $disciplinas = Disciplina::all();
+        $arrDisciplina = [];
+        foreach($disciplinas as $d){
+            $arrDisciplina[$d->id] = $d->id.' - '.$d->nome;
+        }
         $this->layout->content = View::make('alunos.novo')
-                ->with('dados', $dados);
+                ->with('dados', $dados)
+                ->with('disciplinas', $arrDisciplina);
     }
     
     function salvarnovo()
     {
-        $post = Input::all();
+        $post = Input::all();  
+        $disciplinas = Disciplina::all();
+        $arrDisciplina = [];
+        foreach($disciplinas as $d){
+            $arrDisciplina[$d->id] = $d->id.' - '.$d->nome;
+        }
+        $disciplinasselectionadas = [];
+        if(isset($post['disciplinasvinculadas'])){
+            if(isset($post['removerdisciplina'])){
+                foreach($post['disciplinasvinculadas'] as $k=>$d){
+                    if ($d == $post['removerdisciplina']){
+                        unset($post['disciplinasvinculadas'][$k]);
+                    }
+                }
+            }
+            $disciplinasselectionadas = $post['disciplinasvinculadas'];
+        }
+        if(isset($post['novadisciplina']) || isset($post['removerdisciplina'])){
+            if(!in_array($post['selectDisciplina'], $disciplinasselectionadas) && !isset($post['removerdisciplina'])){
+                $disciplinasselectionadas[] = $post['selectDisciplina'];
+            }
+            if(count($disciplinasselectionadas) > 0) $disciplinasselectionadas = Disciplina::whereIn('id', $disciplinasselectionadas)->get();
+            else $disciplinasselectionadas = null;
+            $this->layout->content = View::make('alunos.novo')
+                    ->with('dados', $post)
+                    ->with('arrdisciplinas',$disciplinasselectionadas)
+                    ->with('disciplinas', $arrDisciplina);
+            return null;
+        }
+        
+        if(isset($disciplinasselectionadas) && count($disciplinasselectionadas) > 0){
+            $disciplinasselectionadas = Disciplina::whereIn('id', $disciplinasselectionadas)->get();
+        }else{
+            $disciplinasselectionadas = null;
+        }
+        
         $rules = Pessoa::getRules();
         if($post['temresponsavel'] == 1){
             $rules['nomeresponsavel'] = $rules['nome'];
@@ -49,6 +91,17 @@ Class alunosController extends \BaseController
             $pessoa->save();
             $aluno->pessoa_id = $pessoa->id;
             $aluno->save();
+            
+            if(isset($post['disciplinasvinculadas'])){
+                foreach ($post['disciplinasvinculadas'] as $dv){
+                    $novarelacaodisciplina = new AlunoDisciplina();
+                    $novarelacaodisciplina->aluno_id = $aluno->id;
+                    $disciplina = Disciplina::find($dv);
+                    if(empty($disciplina)) continue;
+                    $novarelacaodisciplina->disciplina_id = $dv;
+                    $novarelacaodisciplina->save();
+                }
+            }
             
             if($post['temresponsavel'] == 1){
                 $responsavel = new Responsavel;
@@ -72,11 +125,14 @@ Class alunosController extends \BaseController
                 'datanascimentoresponsavel' => ''
             ];
             UsuarioLog::newLog("Criado o aluno ".$aluno->id.": ".$aluno->pessoa->nome." ".$aluno->pessoa->sobrenome.".", $usuario->id);
+            $disciplinasselectionadas = null;
             $success = true;
         }
         $this->layout->content = View::make('alunos.novo')
                 ->with('dados', $post)
                 ->with('success',$success)
+                ->with('disciplinas', $arrDisciplina)
+                ->with('arrdisciplinas',$disciplinasselectionadas)
                 ->withErrors($validator);
     }
     
@@ -86,6 +142,18 @@ Class alunosController extends \BaseController
         if(!isset($aluno)){
             return Redirect::to('/alunos');
         }
+        
+        $arrDisciplina = [];
+        $disciplinas = Disciplina::all();
+        foreach($disciplinas as $d){
+            $arrDisciplina[$d->id] = $d->id.' - '.$d->nome;
+        }
+        
+        $disciplinas = null;
+        foreach($aluno->disciplinas as $d){
+            $disciplinas[] = $d->disciplina;
+        }
+        
         $dados = [
             'nome' => $aluno->pessoa->nome,
             'sobrenome' => $aluno->pessoa->sobrenome,
@@ -103,7 +171,9 @@ Class alunosController extends \BaseController
         }
         
         $this->layout->content = View::make('alunos.alterar')
-                ->with('dados', $dados);
+                ->with('dados', $dados)
+                ->with('disciplinas', $arrDisciplina)
+                ->with('arrdisciplinas',$disciplinas);
         
     }
     
@@ -115,6 +185,42 @@ Class alunosController extends \BaseController
         }
         $pessoa = Pessoa::find($aluno->pessoa->id);
         $post = Input::all();
+        
+        $arrDisciplina = [];
+        $disciplinas = Disciplina::all();
+        foreach($disciplinas as $d){
+            $arrDisciplina[$d->id] = $d->id.' - '.$d->nome;
+        }
+        
+        $disciplinas = null;
+        foreach($aluno->disciplinas as $d){
+            $disciplinas[] = $d->disciplina;
+        }
+        $disciplinasselectionadas = [];
+        if(isset($post['disciplinasvinculadas'])){
+            if(isset($post['removerdisciplina'])){
+                foreach($post['disciplinasvinculadas'] as $k=>$d){
+                    if ($d == $post['removerdisciplina']){
+                        unset($post['disciplinasvinculadas'][$k]);
+                    }
+                }
+            }
+            $disciplinasselectionadas = $post['disciplinasvinculadas'];
+        }
+        
+        if(isset($post['novadisciplina']) || isset($post['removerdisciplina'])){
+            if(!in_array($post['selectDisciplina'], $disciplinasselectionadas) && !isset($post['removerdisciplina'])){
+                $disciplinasselectionadas[] = $post['selectDisciplina'];
+            }
+            if(count($disciplinasselectionadas) > 0) $disciplinasselectionadas = Disciplina::whereIn('id', $disciplinasselectionadas)->get();
+            else $disciplinasselectionadas = null;
+            $this->layout->content = View::make('alunos.alterar')
+                    ->with('dados', $post)
+                    ->with('arrdisciplinas',$disciplinasselectionadas)
+                    ->with('disciplinas', $arrDisciplina);
+            return null;
+        }
+        
         $rules = Pessoa::getRules();
         if($post['temresponsavel'] == 1){
             $rules['nomeresponsavel'] = $rules['nome'];
@@ -132,6 +238,23 @@ Class alunosController extends \BaseController
             $pessoa->save();
             $aluno->pessoa_id = $pessoa->id;
             $aluno->save();
+            
+            foreach($aluno->disciplinas as $d){
+                $d->delete();
+            }
+            
+            if(isset($post['disciplinasvinculadas'])){
+                foreach ($post['disciplinasvinculadas'] as $dv){
+                    $novarelacaodisciplina = new AlunoDisciplina();
+                    $novarelacaodisciplina->aluno_id = $aluno->id;
+                    $disciplina = Disciplina::find($dv);
+                    if(empty($disciplina)) continue;
+                    $novarelacaodisciplina->disciplina_id = $dv;
+                    $novarelacaodisciplina->save();
+
+                }
+            }
+            
             if($post['temresponsavel'] == 1){
                 if(isset($aluno->responsavel->id)){
                     $responsavelPessoa = Pessoa::find($aluno->responsavel->id_pessoa);
@@ -171,6 +294,8 @@ Class alunosController extends \BaseController
         $this->layout->content = View::make('alunos.alterar')
                 ->with('dados', $post)
                 ->with('success',$success)
+                ->with('disciplinas', $arrDisciplina)
+                ->with('arrdisciplinas',$disciplinas)
                 ->withErrors($validator);
     }
     
@@ -220,7 +345,13 @@ Class alunosController extends \BaseController
             $dados['datanascimentoresponsavel'] = $aluno->responsavel->pessoa->getFormatedDate('datanascimento','d/m/Y');
         }
         
+        $disciplinas = null;
+        foreach($aluno->disciplinas as $d){
+            $disciplinas[] = $d->disciplina;
+        }
+        
         $this->layout->content = View::make('alunos.visualizar')
-                ->with('dados', $dados);
+                ->with('dados', $dados)
+                ->with('arrdisciplinas',$disciplinas);
     }
 }
