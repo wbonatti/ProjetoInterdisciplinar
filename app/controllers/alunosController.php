@@ -257,7 +257,7 @@ Class alunosController extends \BaseController
             
             if($post['temresponsavel'] == 1){
                 if(isset($aluno->responsavel->id)){
-                    $responsavelPessoa = Pessoa::find($aluno->responsavel->id_pessoa);
+                    $responsavelPessoa = Pessoa::find($aluno->responsavel->pessoa_id);
                     $nascimentoResponsavel = \Carbon\Carbon::createFromFormat('d/m/Y', $post['datanascimentoresponsavel']);
                     $responsavelPessoa->nome = $post['nomeresponsavel'];
                     $responsavelPessoa->sobrenome = $post['sobrenomeresponsavel'];

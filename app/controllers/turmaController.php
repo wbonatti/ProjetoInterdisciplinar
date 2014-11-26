@@ -70,10 +70,64 @@ Class turmaController extends \BaseController
     }
     
     function visualizar($id){
-        return 'visualizar';
+        $turma = Turma::find($id);
+        if(!isset($turma->id)){
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Erro!')
+                ->with('tipo', 'alert-danger')
+                ->with('msg','Essa turma não existe!');
+        }
+        
+        $dados = [
+            'nome' => $turma->nome,
+            'turno' => $turma->turno
+        ];
+        $this->layout->content = View::make('turma.visualizar')->with('dados',$dados);
     }
     
     function alterar($id){
-        return 'alterar';
+        $turma = Turma::find($id);
+        if(!isset($turma->id)){
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Erro!')
+                ->with('tipo', 'alert-danger')
+                ->with('msg','Essa turma não existe!');
+        }
+        
+        $dados = [
+            'nome' => $turma->nome,
+            'turno' => $turma->turno
+        ];
+        $this->layout->content = View::make('turma.alterar')->with('dados',$dados);
+    }
+    
+    function salvaralterar($id){
+        $turma = Turma::find($id);
+        if(!isset($turma->id)){
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Erro!')
+                ->with('tipo', 'alert-danger')
+                ->with('msg','Essa turma não existe!');
+        }
+        
+        $post = Input::all();
+        $success = false;
+        $rules = [
+            'nome' => 'required',
+            'turno' => 'required'
+        ];
+        $validator = Validator::make($post, $rules);
+        if(!$validator->fails()){
+            $turma->nome = $post['nome'];
+            $turma->turno = $post['turno'];
+            $usuario = Autenticacao::UsuarioLogadoObject();
+            UsuarioLog::newLog("Alterada a turma ".$turma->id.": ".$turma->nome, $usuario->id);
+            $turma->update();
+            $success = true;
+        }
+        $this->layout->content = View::make('turma.alterar')
+                ->with('dados',$post)
+                ->withErrors($validator)
+                ->with('success',$success);
     }
 }

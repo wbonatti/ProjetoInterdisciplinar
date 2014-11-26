@@ -111,9 +111,6 @@
                                     
                                         <div class="control-group">
                                             <hr>
-                                            <div class="control-group">
-                                                <h3>Disciplinas</h3>
-                                            </div>
 
                                             <div class="control-group">
                                                 {{Form::label('selectDisciplina','Disciplina:', ['class'=>'control-label'])}}
@@ -122,26 +119,46 @@
                                                     <button name="novadisciplina" value="1" class="btn btn-primary"><i class="icon-large icon-plus-sign"> </i> Adicionar</button>
                                                 </div> <!-- /controls -->				
                                             </div> <!-- /control-group -->
-                                            @if(empty($arrdisciplinas) || count($arrdisciplinas) < 1)
-                                                <div class="alert alert-warning">
-                                                    Você não selecionou nenhuma disciplina
-                                                </div>
-                                            @else
-                                                @foreach($arrdisciplinas as $disciplina)
-                                                    <div class="control-group">
-                                                        {{ $disciplina->id }}
-                                                        {{ $disciplina->nome }}
-                                                        @if(isset($disciplina->turma_id))
-                                                            {{ $disciplina->turma->nome }}
+                                            
+                                            
+                                            
+                                            <div class="widget-content responsive-table">
+                                                <table class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th> # </th>
+                                                            <th> Nome </th>
+                                                            <th> Turma </th>
+                                                            <th> Valor </th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if(empty($arrdisciplinas) || count($arrdisciplinas) < 1)
+                                                            <tr class="alert alert-warning">
+                                                                <td colspan="5">Você não selecionou nenhuma disciplina</td>
+                                                            </tr>
                                                         @else
-                                                            <span class="text-danger">Não vinculado a uma turma</span>
+                                                            @foreach($arrdisciplinas as $disciplina)
+                                                                <tr>
+                                                                    <td>{{ $disciplina->id }}</td>
+                                                                    <td>{{ $disciplina->nome }}</td>
+                                                                    <td>
+                                                                        @if(isset($disciplina->turma_id))
+                                                                                {{ $disciplina->turma->nome }}
+                                                                        @else
+                                                                                <span class="text-danger">Não vinculado a uma turma</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>{{ $disciplina->valor }}</td>
+                                                                    <td><button name="removerdisciplina" value="{{$disciplina->id}}" class="btn btn-danger pull-right"><i class="icon-large icon-minus-sign"> </i> Remover Disciplina</button></td>
+                                                                    <input type="hidden" value="{{$disciplina->id}}" name="disciplinasvinculadas[]">
+                                                                </tr>
+                                                            @endforeach
                                                         @endif
-                                                        {{ $disciplina->valor }}
-                                                        <input type="hidden" value="{{$disciplina->id}}" name="disciplinasvinculadas[]">
-                                                        <button name="removerdisciplina" value="{{$disciplina->id}}" class="btn btn-danger"><i class="icon-large icon-minus-sign"> </i> Remover Disciplina</button>
-                                                    </div>
-                                                @endforeach
-                                            @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                         
                                         <div class="clear-footer"></div>
