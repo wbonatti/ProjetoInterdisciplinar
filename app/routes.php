@@ -83,6 +83,18 @@ else{
     
     Route::group(array('prefix' => 'financeiro'), function(){
         Route::get('/','financeiroController@index');
+        Route::group(array('prefix' => 'mensalidade'), function(){
+            Route::get('/deletar/{id}','financeiroController@deletarmensalidade');
+            Route::get('/novo/','financeiroController@novamensalidade');
+            Route::post('/novo/','financeiroController@salvarnovamensalidade');
+            Route::get('/visualizar/{id}','financeiroController@visualizarmensalidade');
+        });
+        Route::group(array('prefix' => 'salario'), function(){
+            Route::get('/deletar/{id}','financeiroController@deletarsalario');
+            Route::get('/novo/','financeiroController@novosalario');
+            Route::post('/novo/','financeiroController@salvarnovosalario');
+            Route::get('/visualizar/{id}','financeiroController@visualizarsalario');
+        });
     });
     
     Route::group(array('prefix' => 'registros'), function(){

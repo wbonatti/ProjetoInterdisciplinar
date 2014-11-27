@@ -28,16 +28,16 @@
                                             <td data-title='Valor'>{{$p->valor}}</td>
                                             <td data-title='Data'>{{$p->formatDateTime('data','d/m/Y')}}</td>
                                             <td data-title='Ações' class="action-buttons">
-                                                <a href="/funcionarios/visualizar/{{$p->pagamento_id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
-                                                <a href="/funcionarios/alterar/{{$p->pagamento_id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
-                                                <a href="/funcionarios/deletar/{{$p->pagamento_id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/financeiro/mensalidade/visualizar/{{$p->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/financeiro/mensalidade/deletar/{{$p->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
-                                <a href="/mensalidades" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
+                                <?php Paginator::setPageName('page_b');
+                                echo $mensalidades->appends('page_a', Input::get('page_a',1))->links(); ?>
                             </div>
                         </div>
                     </div>
@@ -64,16 +64,16 @@
                                             <td data-title='Valor'>{{$p->valor}}</td>
                                             <td data-title='Data'>{{$p->formatDateTime('data','d/m/Y')}}</td>
                                             <td data-title='Ações' class="action-buttons">
-                                                <a href="/funcionarios/visualizar/{{$p->pagamento_id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
-                                                <a href="/funcionarios/alterar/{{$p->pagamento_id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
-                                                <a href="/funcionarios/deletar/{{$p->pagamento_id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/financeiro/salario/visualizar/{{$p->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
+                                                <a href="/financeiro/salario/deletar/{{$p->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table> 
                             <div class="widget-header text-right">
-                                <a href="/pagamentos" class="btn btn-small btn-success adjust-footer-btn">Ver todos</a>
+                                <?php Paginator::setPageName('page_a');
+                                echo $pagamentos->appends('page_b', Input::get('page_b',1))->links(); ?>
                             </div>
                         </div>
                     </div>
@@ -87,11 +87,11 @@
                         <!-- /widget-header -->
                         <div class="widget-content">
                             <div class="shortcuts">
-                                <a href="javascript:;" class="shortcut">
+                                <a href="/financeiro/salario/novo/" class="shortcut">
                                     <i class="shortcut-icon icon-credit-card"></i>
                                     <span class="shortcut-label">Registrar Pagamento de Salário</span> 
                                 </a>
-                                <a href="javascript:;" class="shortcut">
+                                <a href="/financeiro/mensalidade/novo/" class="shortcut">
                                     <i class="shortcut-icon icon-money"></i>
                                     <span class="shortcut-label">Registrar Pagamento de Mensalidade</span> 
                                 </a>

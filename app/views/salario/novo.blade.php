@@ -5,7 +5,7 @@
 
                 <div class="widget-header">
                     <i class="icon-user"></i>
-                    <h3>Nova Disciplina</h3>
+                    <h3>Novo Pagamento de Salário</h3>
                 </div> <!-- /widget-header -->
                 
                 <div class="widget-content">
@@ -19,47 +19,39 @@
                                         <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Sucesso!</h4>
-                                            Disciplina cadastrado com sucesso.
+                                            Salário pago com sucesso.
                                         </div>
                                     @else
                                         <div class="alert alert-danger alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Erro!</h4>
-                                            Houve um erro ao cadastrar a disciplina.
+                                            Houve um erro ao pagar o salário.
                                         </div>
                                     @endif
                                 @endif
                                     
                                 {{ Form::open() }}
                                     <fieldset>
+                                        
                                         <div class="control-group">
-                                            {{Form::label('nome','Nome:', ['class'=>'control-label'])}}
+                                            {{Form::label('funcionario','Funcionario:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('nome',$dados['nome'], ['autocomplete'=>'off', 'class'=>'span6'])}}
-                                                <p class="text-danger">{{ $errors->first('nome'); }}</p>
+                                                {{Form::select('funcionario',$funcionario, $dados['funcionario'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                <p class="text-danger">{{ $errors->first('funcionario'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('valor','Valor (R$):', ['class'=>'control-label'])}}
+                                            <label class="control-label">Valor (R$):</label>
                                             <div class="controls">
-                                                {{Form::text('valor',$dados['valor'], ['autocomplete'=>'off', 'class'=>'span6'])}}
-                                                <p class="text-danger">{{ $errors->first('valor'); }}</p>
-                                            </div> <!-- /controls -->				
-                                        </div> <!-- /control-group -->
-                                        
-                                        <div class="control-group">
-                                            {{Form::label('turma','Turma:', ['class'=>'control-label'])}}
-                                            <div class="controls">
-                                                {{Form::select('turma',$turmas, $dados['turma'], ['autocomplete'=>'off', 'class'=>'span6'])}}
-                                                <p class="text-danger">{{ $errors->first('turma'); }}</p>
+                                                <p class="control-p" id="valor"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
-                                            <button type="submit" class="btn btn-primary">Salvar</button> 
-                                            <a class="btn" href='/administracao'>Cancelar</a>
+                                            <button type="submit" class="btn btn-primary">Pagar!</button> 
+                                            <a class="btn" href='/financeiro'>Voltar</a>
                                         </div> <!-- /form-actions -->
                                     </fieldset>
                                 {{ Form::close() }}
@@ -72,3 +64,14 @@
         </div> <!-- /span8 -->
     </div> <!-- /row -->
 </div>
+<script type="text/javascript">
+    $.ajax("/ajax/getSalario/"+$('#funcionario').val()).success(function(data){
+       $("#valor").html(data); 
+    });
+    $('#funcionario').change(function(){
+        var x = $(this);
+        $.ajax("/ajax/getSalario/"+x.val()).success(function(data){
+           $("#valor").html(data); 
+        });
+    });
+</script>

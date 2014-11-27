@@ -289,6 +289,22 @@ Class alunosController extends \BaseController
                 }
             }
             UsuarioLog::newLog("Alterado o aluno ".$aluno->id.": ".$aluno->pessoa->nome." ".$aluno->pessoa->sobrenome.".", $usuario->id);
+            
+            $aluno = Aluno::find($id);
+            if(!isset($aluno)){
+                return Redirect::to('/alunos');
+            }
+
+            $arrDisciplina = [];
+            $disciplinas = Disciplina::all();
+            foreach($disciplinas as $d){
+                $arrDisciplina[$d->id] = $d->id.' - '.$d->nome;
+            }
+
+            $disciplinas = null;
+            foreach($aluno->disciplinas as $d){
+                $disciplinas[] = $d->disciplina;
+            }
             $success = true;
         }
         $this->layout->content = View::make('alunos.alterar')

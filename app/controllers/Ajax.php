@@ -16,4 +16,22 @@ Class Ajax{
         
         return $disciplina;
     }
+    function getSalario($id){
+        $funcionario = Funcionario::find($id);
+        if(!isset($funcionario->id)){
+            return 0;
+        }
+        return $funcionario->salario;
+    }
+    function getMensalidade($id){
+        $aluno = Aluno::find($id);
+        if(!isset($aluno->id)){
+            return 0;
+        }
+        $valor = 0;
+        foreach($aluno->disciplinas as $d){
+            $valor += $d->disciplina->valor;
+        }
+        return $valor;
+    }
 }

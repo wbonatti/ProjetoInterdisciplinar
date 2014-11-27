@@ -14,10 +14,10 @@ Class registroController extends \BaseController
         if(isset($get['filtro']) && $get['filtro'] != 'todos'){
             $dados['filtro'] = $get['filtro'];
             $usuario = Usuario::find($get['filtro']);
-            $registro = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('DATE(data) DESC')->paginate(10);
+            $registro = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('id DESC')->paginate(10);
         }
         else{
-            $registro = UsuarioLog::orderByRaw('DATE(data) DESC')->paginate(10);
+            $registro = UsuarioLog::orderByRaw('id DESC')->paginate(10);
         }
         $usuarios = Usuario::all();
         $dadosusuarios = [
