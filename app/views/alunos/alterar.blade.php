@@ -8,7 +8,7 @@
 
                 <div class="widget-header">
                     <i class="icon-user"></i>
-                    <h3>Novo Funcionário</h3>
+                    <h3>Novo Aluno</h3>
                 </div> <!-- /widget-header -->
                 
                 <div class="widget-content">
@@ -21,7 +21,7 @@
                                     @if($success)
                                         <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
-                                            <h4>Successo!</h4>
+                                            <h4>Sucesso!</h4>
                                             Aluno alterado com sucesso.
                                         </div>
                                     @else
