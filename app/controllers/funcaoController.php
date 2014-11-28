@@ -123,7 +123,7 @@ Class funcaoController extends \BaseController
             UsuarioLog::newLog("Alterada função ".$funcao->id.": ".$funcao->nome.".", $usuario->id);
             $success = true;
         }
-        $this->layout->content = View::make('funcoes.novo')
+        $this->layout->content = View::make('funcoes.alterar')
                 ->with('dados', $post)
                 ->with('success',$success)
                 ->withErrors($validator);
