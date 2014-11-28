@@ -370,4 +370,63 @@ Class alunosController extends \BaseController
                 ->with('dados', $dados)
                 ->with('arrdisciplinas',$disciplinas);
     }
+    
+    
+    
+    function notas($id){
+        $dados = [
+            'disciplina' => '',
+            'descricao' => '',
+            'valor' => '',
+        ];
+        $aluno = Aluno::find($id);
+        if(!isset($aluno)){
+            return Redirect::to('/alunos');
+        }
+        $disciplinasAluno = [];
+        foreach ($aluno->disciplinas as $d){
+            $disciplinasAluno[$d->disciplina->id] = $d->disciplina->nome;
+        }
+        $this->layout->content = View::make('alunos.notas')
+                ->with('dados', $dados)
+                ->with('aluno', $aluno)
+                ->with('disciplinas', $disciplinasAluno);
+    }
+    
+    function salvarnotas($id){
+        $post = Input::all();
+        if(isset($post['deletar'])){
+            $n = Nota::find($post['deletar']);
+            if(isset($n->id))
+                $n->delete();
+            return $this->notas($id);
+        }
+        $aluno = Aluno::find($id);
+        if(!isset($aluno)){
+            return Redirect::to('/alunos');
+        }
+        $success = false;
+        $rules = Nota::getRules();
+        $validator = Validator::make($post, $rules);
+        if(!$validator->fails()){
+            $nota = new Nota();
+            $nota->descricao = $post['descricao'];
+            $nota->valor = $post['valor'];
+            $nota->aluno_id = $id;
+            $nota->disciplina_id = $post['disciplina'];
+            $nota->save();
+            return $this->notas($id);
+        }
+        $disciplinasAluno = [];
+        foreach ($aluno->disciplinas as $d){
+            $disciplinasAluno[$d->disciplina->id] = $d->disciplina->nome;
+        }
+        $this->layout->content = View::make('alunos.notas')
+                ->withErrors($validator)
+                ->with('success',$success)
+                ->with('dados', $post)
+                ->with('aluno', $aluno)
+                ->with('disciplinas', $disciplinasAluno);
+    }
+    
 }

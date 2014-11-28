@@ -18,6 +18,33 @@ Class Autenticacao
         }
         return "Usuário ou senha inválidos.";
     }
+    /**
+     * Verifica se o usuário está logado
+     * @return boolean
+     */
+    public static function permissao($tag, $tipo){
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        $permissao = Permissao::where('categoria_id','=',$usuario->categoria_id)->where('tag','like',"%$tag%")->where($tipo,'=',1)->get();
+        return count($permissao)>0;
+    }
+    /**
+     * Verifica se o usuário está logado
+     * @return boolean
+     */
+    public static function pagepermissao($tags=array()){
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        foreach ($tags as $tag){
+            $permissao = Permissao::where('categoria_id','=',$usuario->categoria_id)
+                    ->where('criar','=',0)
+                    ->where('atualizar','=',0)
+                    ->where('ler','=',0)
+                    ->where('excluir','=',0)
+                    ->where('tag','=',$tag)
+                    ->get();
+            if(count($permissao) == 0) return true;
+        }
+        return false;
+    }
     
     /**
      * Verifica se o usuário está logado

@@ -28,72 +28,146 @@ else{
     });
     
     Route::group(array('prefix' => 'funcionarios'), function(){
-        Route::get('/','funcionariosController@index');
-        Route::get('/alterar/{x}','funcionariosController@alterar');
-        Route::post('/alterar/{x}','funcionariosController@salvaralterar');
-        Route::get('/visualizar/{x}','funcionariosController@visualizar');
-        Route::get('/deletar/{x}','funcionariosController@deletar');
-        Route::get('/novo','funcionariosController@novo');
-        Route::post('/novo','funcionariosController@salvarnovo');
+        if(Autenticacao::pagepermissao(['funcionario','funcao'])){
+            Route::get('/','funcionariosController@index');
+        }
+        
+        if(Autenticacao::permissao('funcionario','atualizar')){
+            Route::get('/alterar/{x}','funcionariosController@alterar');
+            Route::post('/alterar/{x}','funcionariosController@salvaralterar');
+        }
+        if(Autenticacao::permissao('funcionario','ler')){
+            Route::get('/visualizar/{x}','funcionariosController@visualizar');
+        }
+        if(Autenticacao::permissao('funcionario','excluir')){
+            Route::get('/deletar/{x}','funcionariosController@deletar');
+        }
+        if(Autenticacao::permissao('funcionario','criar')){
+            Route::get('/novo','funcionariosController@novo');
+            Route::post('/novo','funcionariosController@salvarnovo');
+        }
     });
     
     
     Route::group(array('prefix' => 'funcao'), function(){
-        Route::get('/alterar/{x}','funcaoController@alterar');
-        Route::post('/alterar/{x}','funcaoController@salvaralterar');
-        Route::get('/visualizar/{x}','funcaoController@visualizar');
-        Route::get('/deletar/{x}','funcaoController@deletar');
-        Route::get('/novo','funcaoController@novo');
-        Route::post('/novo','funcaoController@salvarnovo');
+        if(Autenticacao::pagepermissao(['funcionario','funcao'])){
+            Route::get('/','funcionariosController@index');
+        }
+        if(Autenticacao::permissao('funcao','atualizar')){
+            Route::get('/alterar/{x}','funcaoController@alterar');
+            Route::post('/alterar/{x}','funcaoController@salvaralterar');
+        }
+        if(Autenticacao::permissao('funcao','ler')){
+            Route::get('/visualizar/{x}','funcaoController@visualizar');
+        }
+        if(Autenticacao::permissao('funcao','excluir')){
+            Route::get('/deletar/{x}','funcaoController@deletar');
+        }
+        if(Autenticacao::permissao('funcao','criar')){
+            Route::get('/novo','funcaoController@novo');
+            Route::post('/novo','funcaoController@salvarnovo');
+        }
     });
     
     Route::group(array('prefix' => 'alunos'), function(){
-        Route::get('/','alunosController@index');
-        Route::get('/novo','alunosController@novo');
-        Route::post('/novo','alunosController@salvarnovo');
-        Route::get('/alterar/{x}','alunosController@alterar');
-        Route::post('/alterar/{x}','alunosController@salvaralterar');
-        Route::get('/visualizar/{x}','alunosController@visualizar');
-        Route::get('/deletar/{x}','alunosController@deletar');
+        if(Autenticacao::pagepermissao(['aluno','nota'])){
+            Route::get('/','alunosController@index');
+        }
+        if(Autenticacao::permissao('aluno','criar')){
+            Route::get('/novo','alunosController@novo');
+            Route::post('/novo','alunosController@salvarnovo');
+        }
+        if(Autenticacao::permissao('aluno','atualizar')){
+            Route::get('/alterar/{x}','alunosController@alterar');
+            Route::post('/alterar/{x}','alunosController@salvaralterar');
+        }
+        if(Autenticacao::permissao('aluno','ler')){
+            Route::get('/visualizar/{x}','alunosController@visualizar');
+        }
+        if(Autenticacao::permissao('aluno','excluir')){
+            Route::get('/deletar/{x}','alunosController@deletar');
+        }
+        if(Autenticacao::pagepermissao(['nota'])){
+            Route::get('/notas/{id}','alunosController@notas');
+            Route::post('/notas/{id}','alunosController@salvarnotas');
+        }
     });
     
     Route::group(array('prefix' => 'disciplina'), function(){
-        Route::get('/','administracaoController@index');
-        Route::get('/novo','disciplinaController@novo');
-        Route::post('/novo','disciplinaController@salvarnovo');
-        Route::get('/alterar/{x}','disciplinaController@alterar');
-        Route::post('/alterar/{x}','disciplinaController@salvaralterar');
-        Route::get('/visualizar/{x}','disciplinaController@visualizar');
-        Route::get('/deletar/{x}','disciplinaController@deletar');
+        if(Autenticacao::pagepermissao(['disciplina'])){
+            Route::get('/','administracaoController@index');
+        }
+        if(Autenticacao::permissao('disciplina','criar')){
+            Route::get('/novo','disciplinaController@novo');
+            Route::post('/novo','disciplinaController@salvarnovo');
+        }
+        if(Autenticacao::permissao('disciplina','atualizar')){
+            Route::get('/alterar/{x}','disciplinaController@alterar');
+            Route::post('/alterar/{x}','disciplinaController@salvaralterar');
+        }
+        if(Autenticacao::permissao('disciplina','ler')){
+            Route::get('/visualizar/{x}','disciplinaController@visualizar');
+        }
+        if(Autenticacao::permissao('disciplina','excluir')){
+            Route::get('/deletar/{x}','disciplinaController@deletar');
+        }
     });
     
     Route::group(array('prefix' => 'turma'), function(){
-        Route::get('/','administracaoController@index');
-        Route::get('/novo','turmaController@novo');
-        Route::post('/novo','turmaController@salvarnovo');
-        Route::get('/alterar/{x}','turmaController@alterar');
-        Route::post('/alterar/{x}','turmaController@salvaralterar');
-        Route::get('/visualizar/{x}','turmaController@visualizar');
-        Route::get('/deletar/{x}','turmaController@deletar');
+        if(Autenticacao::pagepermissao(['turma'])){
+            Route::get('/','administracaoController@index');
+        }
+        if(Autenticacao::permissao('turma','criar')){
+            Route::get('/novo','turmaController@novo');
+            Route::post('/novo','turmaController@salvarnovo');
+        }
+        if(Autenticacao::permissao('turma','atualizar')){
+            Route::get('/alterar/{x}','turmaController@alterar');
+            Route::post('/alterar/{x}','turmaController@salvaralterar');
+        }
+        if(Autenticacao::permissao('turma','ler')){
+            Route::get('/visualizar/{x}','turmaController@visualizar');
+        }
+        if(Autenticacao::permissao('turma','excluir')){
+            Route::get('/deletar/{x}','turmaController@deletar');
+        }
     });
     
     Route::group(array('prefix' => 'administracao'), function(){
-        Route::get('/','administracaoController@index');
+        if(Autenticacao::pagepermissao(['turma', 'disciplina'])){
+            Route::get('/','administracaoController@index');
+        }
     });
     
     Route::group(array('prefix' => 'financeiro'), function(){
-        Route::get('/','financeiroController@index');
+        if(Autenticacao::pagepermissao(['mensalidade', 'salario'])){
+            Route::get('/','financeiroController@index');
+        }
         Route::group(array('prefix' => 'mensalidade'), function(){
-            Route::get('/deletar/{id}','financeiroController@deletarmensalidade');
-            Route::get('/novo/','financeiroController@novamensalidade');
-            Route::post('/novo/','financeiroController@salvarnovamensalidade');
-            Route::get('/visualizar/{id}','financeiroController@visualizarmensalidade');
+            if(Autenticacao::permissao('mensalidade','excluir')){
+                Route::get('/deletar/{id}','financeiroController@deletarmensalidade');
+            }
+            if(Autenticacao::permissao('mensalidade','criar')){
+                Route::get('/novo/','financeiroController@novamensalidade');
+                Route::post('/novo/','financeiroController@salvarnovamensalidade');
+            }
+            if(Autenticacao::permissao('mensalidade','ler')){
+                Route::get('/visualizar/{id}','financeiroController@visualizarmensalidade');
+            }
         });
         Route::group(array('prefix' => 'salario'), function(){
-            Route::get('/deletar/{id}','financeiroController@deletarsalario');
-            Route::get('/novo/','financeiroController@novosalario');
-            Route::post('/novo/','financeiroController@salvarnovosalario');
-            Route::get('/visualizar/{id}','financeiroController@visualizarsalario');
+            if(Autenticacao::permissao('salario','excluir')){
+                Route::get('/deletar/{id}','financeiroController@deletarsalario');
+            }
+            
+            if(Autenticacao::permissao('salario','criar')){
+                Route::get('/novo/','financeiroController@novosalario');
+                Route::post('/novo/','financeiroController@salvarnovosalario');
+            }
+            
+            if(Autenticacao::permissao('salario','ler')){
+                Route::get('/visualizar/{id}','financeiroController@visualizarsalario');
+            }
         });
     });
     
@@ -102,7 +176,32 @@ else{
     });
     
     Route::group(array('prefix' => 'usuarios'), function(){
-        Route::get('/','usuarioController@index');
+        if(Autenticacao::pagepermissao(['usuario', 'categoria'])){
+            Route::get('/','usuarioController@index');
+        }
+        
+        if(Autenticacao::permissao('usuario','criar')){
+            Route::get('/novo','usuarioController@novo');
+            Route::post('/novo','usuarioController@salvarnovo');
+        }
+        if(Autenticacao::permissao('usuario','atualizar')){
+            Route::get('/alterar/{id}','usuarioController@alterar');
+            Route::post('/alterar/{id}','usuarioController@salvaralterar');
+        }
+    
+        Route::group(array('prefix' => 'categoria'), function(){
+            if(Autenticacao::permissao('categoria','criar')){
+                Route::get('/nova','categoriaController@nova');
+                Route::post('/nova','categoriaController@salvarnova');
+            }   
+            if(Autenticacao::permissao('categoria','atualizar')){
+                Route::get('/alterar/{id}','categoriaController@alterar');
+                Route::post('/alterar/{id}','categoriaController@salvaralterar');
+            }
+            if(Autenticacao::permissao('categoria','excluir')){
+                Route::get('/deletar/{id}','categoriaController@deletar');
+            }
+        });
     });
 
     Route::get('/logout', function(){

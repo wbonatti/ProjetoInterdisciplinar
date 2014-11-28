@@ -5,7 +5,7 @@
 
                 <div class="widget-header">
                     <i class="icon-user"></i>
-                    <h3>Alterar Disciplina</h3>
+                    <h3>Novo Usuario</h3>
                 </div> <!-- /widget-header -->
                 
                 <div class="widget-content">
@@ -19,47 +19,55 @@
                                         <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Sucesso!</h4>
-                                            Disciplina alterada com sucesso.
+                                            Usuário cadastrado com sucesso.
                                         </div>
                                     @else
                                         <div class="alert alert-danger alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <h4>Erro!</h4>
-                                            Houve um erro ao alterar a disciplina.
+                                            Houve um erro ao cadastrar usuário.
                                         </div>
                                     @endif
                                 @endif
-                                    
                                 {{ Form::open() }}
                                     <fieldset>
+                                        
                                         <div class="control-group">
-                                            {{Form::label('nome','Nome:', ['class'=>'control-label'])}}
+                                            {{Form::label('funcionario','Funcionario:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('nome',$dados['nome'], ['autocomplete'=>'off', 'class'=>'span6'])}}
-                                                <p class="text-danger">{{ $errors->first('nome'); }}</p>
+                                                {{Form::select('funcionario',$funcionario, $dados['funcionario'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                <p class="text-danger">{{ $errors->first('funcionario'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('valor','Valor (R$):', ['class'=>'control-label'])}}
+                                            {{Form::label('categoria','Categoria:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('valor',number_format($dados['valor'],2), ['autocomplete'=>'off', 'class'=>'span6 currency',  'maxlength'=>'10'])}}
-                                                <p class="text-danger">{{ $errors->first('valor'); }}</p>
+                                                {{Form::select('categoria',$categoria, $dados['categoria'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                <p class="text-danger">{{ $errors->first('categoria'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('turma','Turma:', ['class'=>'control-label'])}}
+                                            {{Form::label('email','Email:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::select('turma',$turmas, $dados['turma'], ['autocomplete'=>'off', 'class'=>'span6'])}}
-                                                <p class="text-danger">{{ $errors->first('turma'); }}</p>
+                                                {{Form::text('email',$dados['email'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                <p class="text-danger">{{ $errors->first('email'); }}</p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+                                        
+                                        <div class="control-group">
+                                            {{Form::label('senha','Senha:', ['class'=>'control-label'])}}
+                                            <div class="controls">
+                                                {{Form::password('senha', ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                <p class="text-danger">{{ $errors->first('senha'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
                                         
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
-                                            <button type="submit" class="btn btn-primary">Alterar</button> 
-                                            <a class="btn" href='/administracao'>Voltar</a>
+                                            <button type="submit" class="btn btn-primary">Cadastrar</button> 
+                                            <a class="btn" href='/usuarios'>Voltar</a>
                                         </div> <!-- /form-actions -->
                                     </fieldset>
                                 {{ Form::close() }}

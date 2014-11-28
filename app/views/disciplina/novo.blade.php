@@ -43,7 +43,7 @@
                                         <div class="control-group">
                                             {{Form::label('valor','Valor (R$):', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('valor',$dados['valor'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                {{Form::text('valor',number_format($dados['valor'],2), ['autocomplete'=>'off', 'class'=>'span6 currency',  'maxlength'=>'10'])}}
                                                 <p class="text-danger">{{ $errors->first('valor'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
@@ -59,7 +59,7 @@
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
                                             <button type="submit" class="btn btn-primary">Salvar</button> 
-                                            <a class="btn" href='/administracao'>Cancelar</a>
+                                            <a class="btn" href='/administracao'>Voltar</a>
                                         </div> <!-- /form-actions -->
                                     </fieldset>
                                 {{ Form::close() }}

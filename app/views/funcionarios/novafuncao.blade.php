@@ -46,7 +46,7 @@
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
                                             <button type="submit" class="btn btn-primary">Salvar</button> 
-                                            <a class="btn" href='/funcionarios'>Cancelar</a>
+                                            <a class="btn" href='/funcionarios'>Voltar</a>
                                         </div> <!-- /form-actions -->
                                     </fieldset>
                                 {{ Form::close() }}

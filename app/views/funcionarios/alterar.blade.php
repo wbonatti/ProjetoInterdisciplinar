@@ -52,7 +52,7 @@
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('nascimento','Data de nascimento:', ['class'=>'control-label'])}}
+                                            {{Form::label('datanascimento','Data de nascimento:', ['class'=>'control-label'])}}
                                             <div class="controls">
                                                 {{Form::text('datanascimento',$dados['datanascimento'], ['autocomplete'=>'off', 'class'=>'span4'])}}
                                                 <p class="text-danger">{{ $errors->first('datanascimento'); }}</p>
@@ -78,7 +78,7 @@
                                         <div class="control-group">
                                             {{Form::label('salario','Salário:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('salario',$dados['salario'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                {{Form::text('salario',number_format($dados['salario'],2), ['autocomplete'=>'off', 'class'=>'span6 currency',  'maxlength'=>'10'])}}
                                                 <p class="text-danger">{{ $errors->first('salario'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
@@ -96,7 +96,7 @@
                                         <div class="clear-footer"></div>
                                         <div class="form-actions footer-actions">
                                             <button type="submit" class="btn btn-primary">Salvar</button> 
-                                            <a class="btn" href='/funcionarios'>Cancelar</a>
+                                            <a class="btn" href='/funcionarios'>Voltar</a>
                                         </div> <!-- /form-actions -->
                                     </fieldset>
                                 {{ Form::close() }}

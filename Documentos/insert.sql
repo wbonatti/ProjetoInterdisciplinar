@@ -1,4 +1,4 @@
-use Intranet;
+﻿use Intranet;
 ## INSERT TABLE CATEGORIA
 INSERT INTO categoria VALUES(1,'Administrador');
 INSERT INTO categoria VALUES(2,'Diretor');
@@ -9,9 +9,22 @@ INSERT INTO funcao VALUES(1,'Presidente');
 INSERT INTO funcao VALUES(2,'Diretor');
 INSERT INTO funcao VALUES(3,'Professor');
 
+## INSERT TABELA PERMISSAO
+INSERT INTO permissao VALUES(1,'registro',1,1,1,1,1);
+INSERT INTO permissao VALUES(2,'funcionario',1,1,1,1,1);
+INSERT INTO permissao VALUES(3,'funcao',1,1,1,1,1);
+INSERT INTO permissao VALUES(4,'aluno',1,1,1,1,1);
+INSERT INTO permissao VALUES(5,'turma',1,1,1,1,1);
+INSERT INTO permissao VALUES(6,'disciplina',1,1,1,1,1);
+INSERT INTO permissao VALUES(7,'nota',1,1,1,1,1);
+INSERT INTO permissao VALUES(8,'mensalidade',1,1,1,1,1);
+INSERT INTO permissao VALUES(9,'salario',1,1,1,1,1);
+INSERT INTO permissao VALUES(10,'usuario',1,1,1,1,1);
+INSERT INTO permissao VALUES(11,'categoria',1,1,1,1,1);
+
 ## INSERT TABLE PESSOA
 INSERT INTO pessoa VALUES(1,'Wellinton', 'Perazzoli', '1993/10/02');
-INSERT INTO pessoa VALUES(2,'Camila', 'Lemes', '1995/03/04');
+INSERT INTO pessoa VALUES(2,'Zangetsu', 'Hollow', '1995/03/04');
 INSERT INTO pessoa VALUES(3,'Kurosaki', 'Ichigo', '1993/03/07');
 INSERT INTO pessoa VALUES(4,'Raito', 'Agami', '1990/05/07');
 INSERT INTO pessoa VALUES(5,'Aluno 1', 'aluno 1', '1990/05/07');
@@ -33,7 +46,7 @@ INSERT INTO funcionario VALUES(4,'85998565847','77575755',1500,4,3);
 
 
 ## INSERT TABLE USUARIO
-INSERT INTO usuario VALUES(1,'wellctba@gmail.com','321',1,1);
+INSERT INTO usuario VALUES(1,'admin@admin.com','321',1,1);
 INSERT INTO usuario VALUES(2,'camilabeatriz@msn.com','321',2,2);
 INSERT INTO usuario VALUES(3,'kurosakiichigo@gmail.com','321',3,3);
 INSERT INTO usuario VALUES(4, 'raito@hotmail.com','321',4,3);

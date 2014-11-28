@@ -16,7 +16,7 @@ class Nota extends BaseModel {
     
     public static function getRules(){
         return [
-
+            'valor' => 'required|numeric|between:0,100'
         ];
     }
 

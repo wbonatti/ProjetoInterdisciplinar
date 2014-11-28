@@ -24,7 +24,8 @@ if (!isset($title))
         <script src="/js/excanvas.min.js"></script> 
         <script src="/js/Chart.js" type="text/javascript"></script> 
         <script src="/js/bootstrap.js"></script>
-        <script src="/js/base.js"></script> 
+        <script src="/js/base.js"></script>
+        <script src="/js/jquery.mask.js"></script> 
     </head>
     <body>
         <div class="geral">
@@ -57,11 +58,21 @@ if (!isset($title))
                     <div class="container">
                         <ul class="mainnav">
                             <li class="{{$menu[0]}}"><a href="/"><i class="icon-dashboard"></i><span>Geral</span> </a> </li>
-                            <li class="{{$menu[1]}}"><a href="/funcionarios"><i class="icon-book"></i><span>Funcionários</span> </a> </li>
-                            <li class="{{$menu[2]}}"><a href="/alunos"><i class="icon-list-alt"></i><span>Alunos</span> </a></li>
-                            <li class="{{$menu[3]}}"><a href="/administracao"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
-                            <li class="{{$menu[4]}}"><a href="/financeiro"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
-                            <li class="{{$menu[5]}}"><a href="/usuarios"><i class="icon-key"></i><span>Usuários</span> </a> </li>
+                            @if(Autenticacao::pagepermissao(['funcionario','funcao']))
+                                <li class="{{$menu[1]}}"><a href="/funcionarios"><i class="icon-book"></i><span>Funcionários e Funções</span> </a> </li>
+                            @endif
+                            @if(Autenticacao::pagepermissao(['aluno','nota']))
+                                <li class="{{$menu[2]}}"><a href="/alunos"><i class="icon-list-alt"></i><span>Alunos e Notas</span> </a></li>
+                            @endif
+                            @if(Autenticacao::pagepermissao(['turma', 'disciplina']))
+                                <li class="{{$menu[3]}}"><a href="/administracao"><i class="icon-bar-chart"></i><span>Administrativo</span> </a> </li>
+                            @endif
+                            @if(Autenticacao::pagepermissao(['mensalidade','salario']))
+                                <li class="{{$menu[4]}}"><a href="/financeiro"><i class="icon-money"></i><span>Financeiro</span> </a> </li>
+                            @endif
+                            @if(Autenticacao::pagepermissao(['usuario', 'categoria']))
+                                <li class="{{$menu[5]}}"><a href="/usuarios"><i class="icon-key"></i><span>Usuários e Categorias</span> </a> </li>
+                            @endif
                             <li class="{{$menu[6]}}"><a href="/registros"><i class="icon-eye-open"></i><span>Registros</span> </a> </li>
                         </ul>
                     </div>
@@ -90,5 +101,14 @@ if (!isset($title))
                 <!-- /footer-inner --> 
             </div>
         </footer>
+        <script type="text/javascript">
+            $('.currency').each(function(){
+               $(this).mask("###0.00", {reverse: true, placeholder: "00.00"});
+            });
+            $('#cpf').mask("99999999999", {placeholder: "00000000000"})
+            $('#rg').mask("999999999", {placeholder: "000000000"})
+            $('#data, #nascimento, #datanascimento').mask("99/99/9999", {placeholder: "00/00/0000"})
+                
+        </script>
     </body>
 </html>

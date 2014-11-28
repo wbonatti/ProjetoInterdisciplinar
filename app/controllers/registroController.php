@@ -7,24 +7,31 @@ Class registroController extends \BaseController
     
     function index()
     {
-        $get = Input::get();
-        $dados = [
-            'filtro' => 'todos'
-        ];
-        if(isset($get['filtro']) && $get['filtro'] != 'todos'){
-            $dados['filtro'] = $get['filtro'];
-            $usuario = Usuario::find($get['filtro']);
+        $dadosusuarios = [];
+        $dados = [];
+        if(!Autenticacao::permissao('registro', 'ler')){
+            $usuario = Autenticacao::UsuarioLogadoObject();
             $registro = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('id DESC')->paginate(10);
-        }
-        else{
-            $registro = UsuarioLog::orderByRaw('id DESC')->paginate(10);
-        }
-        $usuarios = Usuario::all();
-        $dadosusuarios = [
-            'todos' => 'Mostrar Tudo'
-        ];
-        foreach($usuarios as $u){
-            $dadosusuarios[$u->id] = $u->funcionario->pessoa->nome.' '.$u->funcionario->pessoa->sobrenome;
+        }else{
+            $get = Input::get();
+            $dados = [
+                'filtro' => 'todos'
+            ];
+            if(isset($get['filtro']) && $get['filtro'] != 'todos'){
+                $dados['filtro'] = $get['filtro'];
+                $usuario = Usuario::find($get['filtro']);
+                $registro = UsuarioLog::where('usuario_id','=',$usuario->id)->orderByRaw('id DESC')->paginate(10);
+            }
+            else{
+                $registro = UsuarioLog::orderByRaw('id DESC')->paginate(10);
+            }
+            $usuarios = Usuario::all();
+            $dadosusuarios = [
+                'todos' => 'Mostrar Tudo'
+            ];
+            foreach($usuarios as $u){
+                $dadosusuarios[$u->id] = $u->funcionario->pessoa->nome.' '.$u->funcionario->pessoa->sobrenome;
+            }
         }
         $this->layout->content = View::make('registro.index')
                 ->with('logs', $registro)

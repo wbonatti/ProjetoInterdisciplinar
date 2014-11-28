@@ -90,7 +90,7 @@ Class funcionariosController extends \BaseController
             'datanascimento' => '',
             'cpf' => '',
             'rg' => '',
-            'salario' => '',
+            'salario' => null,
             'funcao' => ''
         ];
         foreach($funcoes as $f){
@@ -172,7 +172,7 @@ Class funcionariosController extends \BaseController
                 'datanascimento' => '',
                 'cpf' => '',
                 'rg' => '',
-                'salario' => '',
+                'salario' => null,
                 'funcao' => ''
             ];
             UsuarioLog::newLog("Criado o funcionário ".$funcionario->id.": ".$funcionario->pessoa->nome." ".$funcionario->pessoa->sobrenome.".", $usuario->id);

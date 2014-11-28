@@ -23,7 +23,7 @@ Class disciplinaController extends \BaseController
         }
         $dados = [
             'nome' => '',
-            'valor' => '',
+            'valor' => null,
             'turma' => ''
         ];
         $this->layout->content = View::make('disciplina.novo')->with('dados',$dados)->with('turmas',$dadosturmas);
@@ -52,7 +52,7 @@ Class disciplinaController extends \BaseController
             $disciplina->save();
             $post = [
                 'nome' => '',
-                'valor' => '',
+                'valor' => null,
                 'turma' => ''
             ];
             UsuarioLog::newLog("Criada disciplina ".$disciplina->id.": ".$disciplina->nome.".", $usuario->id);

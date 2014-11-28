@@ -341,7 +341,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Intranet`.`notas` ;
 
 CREATE TABLE IF NOT EXISTS `Intranet`.`notas` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(45) NULL,
   `valor` FLOAT NULL,
   `aluno_id` INT NOT NULL,
