@@ -33,7 +33,7 @@
                                                 <a href="/financeiro/mensalidade/visualizar/{{$p->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
                                             @endif  
                                             @if(Autenticacao::permissao('mensalidade','excluir'))
-                                                <a href="/financeiro/mensalidade/deletar/{{$p->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/financeiro/mensalidade/deletar/{{$p->id}}" onclick="return confirm('Tem certeza que quer excluir esse item?');" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             @endif
                                             </td>
                                         </tr>
@@ -75,7 +75,7 @@
                                                 <a href="/financeiro/salario/visualizar/{{$p->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
                                             @endif 
                                             @if(Autenticacao::permissao('salario','excluir'))
-                                                <a href="/financeiro/salario/deletar/{{$p->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/financeiro/salario/deletar/{{$p->id}}" onclick="return confirm('Tem certeza que quer excluir esse item?');" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             @endif
                                             </td>
                                         </tr>

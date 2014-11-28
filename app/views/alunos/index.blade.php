@@ -40,7 +40,7 @@
                                                     <a href="/alunos/alterar/{{$a->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
                                                 @endif
                                                 @if(Autenticacao::permissao('aluno','excluir'))
-                                                    <a href="/alunos/deletar/{{$a->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                    <a href="/alunos/deletar/{{$a->id}}" onclick="return confirm('Tem certeza que quer excluir esse item?');" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                                 @endif
                                             </td>
                                             <td class="action-buttons">

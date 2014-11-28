@@ -188,6 +188,9 @@ else{
             Route::get('/alterar/{id}','usuarioController@alterar');
             Route::post('/alterar/{id}','usuarioController@salvaralterar');
         }
+        if(Autenticacao::permissao('usuario','excluir')){
+            Route::get('/deletar/{id}','usuarioController@deletar');
+        }
     
         Route::group(array('prefix' => 'categoria'), function(){
             if(Autenticacao::permissao('categoria','criar')){

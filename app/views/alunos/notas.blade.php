@@ -64,7 +64,7 @@
                                         <div class="control-group">
                                             {{Form::label('valor','Nota:', ['class'=>'control-label'])}}
                                             <div class="controls">
-                                                {{Form::text('valor',$dados['valor'], ['autocomplete'=>'off', 'class'=>'span6'])}}
+                                                {{Form::text('valor',$dados['valor'], ['autocomplete'=>'off', 'class'=>'span6 nota'])}}
                                                 <p class="text-danger">{{ $errors->first('valor'); }}</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
@@ -113,7 +113,7 @@
                                                     </td>
                                                     <td>
                                                         @if(Autenticacao::permissao('nota','excluir'))
-                                                            <button class="btn btn-danger btn-small btn-show" value="{{$n->id}}" name="deletar"><i class="btn-icon-only icon-remove"> </i></button>
+                                                            <button class="btn btn-danger btn-small btn-show" onclick="return confirm('Tem certeza que quer excluir esse item?');" value="{{$n->id}}" name="deletar"><i class="btn-icon-only icon-remove"> </i></button>
                                                         @endif
                                                     </td>
                                                 </tr>

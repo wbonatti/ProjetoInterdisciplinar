@@ -107,6 +107,7 @@ if (!isset($title))
             });
             $('#cpf').mask("99999999999", {placeholder: "00000000000"})
             $('#rg').mask("999999999", {placeholder: "000000000"})
+            $(".nota").mask("999");
             $('#data, #nascimento, #datanascimento').mask("99/99/9999", {placeholder: "00/00/0000"})
                 
         </script>

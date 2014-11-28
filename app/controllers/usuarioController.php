@@ -168,4 +168,26 @@ Class usuarioController extends \BaseController
                 ->with('success',$success)
                 ->with('dados',$dados);
     }
+    
+    function deletar($id){
+        $dusuario = Usuario::find($id);
+        if(!isset($dusuario->id)){
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Erro!')
+                ->with('tipo', 'alert-danger')
+                ->with('msg','Esse usuário não existe!');
+            $this->index();
+            return null;
+        }
+        
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        UsuarioLog::newLog("Deletado o usuario ".$dusuario->id.": ".$dusuario->email.".", $usuario->id);
+        $dusuario->delete();
+        
+        $this->layout->error = View::make('default.acao')
+            ->with('titulo', 'Sucesso!')
+            ->with('tipo', 'alert-success')
+            ->with('msg','Usuário deletado com sucesso!');
+        return $this->index();
+    }
 }

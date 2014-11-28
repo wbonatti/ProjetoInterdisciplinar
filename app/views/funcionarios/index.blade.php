@@ -34,7 +34,7 @@
                                                 <a href="/funcao/alterar/{{$f->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
                                             @endif
                                             @if(Autenticacao::permissao('funcao','excluir'))
-                                                <a href="/funcao/deletar/{{$f->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/funcao/deletar/{{$f->id}}" onclick="return confirm('Tem certeza que quer excluir esse item?');" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             @endif
                                             </td>
                                         </tr>
@@ -81,7 +81,7 @@
                                                 <a href="/funcionarios/alterar/{{$f->id}}" class="btn btn-warning btn-small btn-show" title="Alterar"><i class="btn-icon-only icon-pencil"> </i> <span>Alterar</span></a>
                                             @endif
                                             @if(Autenticacao::permissao('funcionario','excluir'))
-                                                <a href="/funcionarios/deletar/{{$f->id}}" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
+                                                <a href="/funcionarios/deletar/{{$f->id}}" onclick="return confirm('Tem certeza que quer excluir esse item?');" class="btn btn-danger btn-small btn-show" title="Deletar"><i class="btn-icon-only icon-remove"> </i> <span>Deletar</span></a>
                                             @endif
                                             </td>
                                         </tr>
