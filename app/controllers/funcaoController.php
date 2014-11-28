@@ -119,7 +119,7 @@ Class funcaoController extends \BaseController
         if(!$validator->fails()){
             $usuario = Autenticacao::UsuarioLogadoObject();
             $funcao->nome = $post['nome'];
-            $funcao->save();
+            $funcao->update();
             UsuarioLog::newLog("Alterada função ".$funcao->id.": ".$funcao->nome.".", $usuario->id);
             $success = true;
         }
