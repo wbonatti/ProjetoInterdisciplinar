@@ -88,30 +88,26 @@
                                             </thead>
                                             <tbody>
                                                 @if(count($aluno->notas) < 1)
-                                                <tr>
-                                                    <td colspan="5">
-                                                        <div class="alert alert-warning text-center">
-                                                            Nenhuma nota cadastrada
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <div class="alert alert-warning text-center">
+                                                    Nenhuma nota cadastrada
+                                                </div>
                                                 @endif
                                                 
                                                 @foreach($aluno->notas as $n)
                                                 <tr>
-                                                    <td>
+                                                    <td data-title='#'>
                                                         {{$n->id}}
                                                     </td>
-                                                    <td>
+                                                    <td data-title='Disciplina'>
                                                         {{$n->disciplina->nome}}
                                                     </td>
-                                                    <td>
+                                                    <td data-title='Descricao'>
                                                         {{$n->descricao}}
                                                     </td>
-                                                    <td>
+                                                    <td data-title='Valor'>
                                                         {{$n->valor}}
                                                     </td>
-                                                    <td>
+                                                    <td data-title='Ações'>
                                                         @if(Autenticacao::permissao('nota','excluir'))
                                                             <button class="btn btn-danger btn-small btn-show" onclick="return confirm('Tem certeza que quer excluir esse item?');" value="{{$n->id}}" name="deletar"><i class="btn-icon-only icon-remove"> </i></button>
                                                         @endif

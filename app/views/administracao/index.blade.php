@@ -22,9 +22,9 @@
                                 <tbody>
                                     @foreach($turmas as $t)
                                     <tr>
-                                        <td>{{$t->id}}</td>
-                                        <td>{{$t->nome}}</td>
-                                        <td>{{count($t->disciplinas)}}</td>
+                                        <td data-title='#'>{{$t->id}}</td>
+                                        <td data-title='Nome'>{{$t->nome}}</td>
+                                        <td data-title='Disciplinas'>{{count($t->disciplinas)}}</td>
                                         <td data-title='Ações' class="action-buttons">
                                             @if(Autenticacao::permissao('turma','ler'))
                                             <a href="/turma/visualizar/{{$t->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
@@ -70,9 +70,9 @@
                                 <tbody>
                                     @foreach($disciplinas as $d)
                                     <tr>
-                                        <td>{{$d->id}}</td>
-                                        <td>{{$d->nome}}</td>
-                                        <td>{{count($d->alunos)}}</td>
+                                        <td data-title='#'>{{$d->id}}</td>
+                                        <td data-title='Nome'>{{$d->nome}}</td>
+                                        <td data-title='Alunos'>{{count($d->alunos)}}</td>
                                         <td data-title='Ações' class="action-buttons">
                                             @if(Autenticacao::permissao('disciplina','ler'))
                                             <a href="/disciplina/visualizar/{{$d->id}}" class="btn btn-info btn-small btn-show" title="Visualizar"><i class="btn-icon-only icon-eye-open"> </i> <span>Visualizar</span></a>
