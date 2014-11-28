@@ -394,11 +394,18 @@ Class alunosController extends \BaseController
     }
     
     function salvarnotas($id){
+        $usuario = Autenticacao::UsuarioLogadoObject();
         $post = Input::all();
         if(isset($post['deletar'])){
             $n = Nota::find($post['deletar']);
-            if(isset($n->id))
+            if(isset($n->id)){
+                UsuarioLog::newLog("Deletada a nota ".$n->id." do aluno '".$n->aluno->pessoa->nome." ".$n->aluno->pessoa->sobrenome."' referente a disciplina '".$n->disciplina->nome."'.", $usuario->id);
                 $n->delete();
+                $this->layout->error = View::make('default.acao')
+                    ->with('titulo', 'Sucesso!')
+                    ->with('tipo', 'alert-success')
+                    ->with('msg','Nota deletada com sucesso!');
+            }
             return $this->notas($id);
         }
         $aluno = Aluno::find($id);
@@ -415,6 +422,12 @@ Class alunosController extends \BaseController
             $nota->aluno_id = $id;
             $nota->disciplina_id = $post['disciplina'];
             $nota->save();
+            UsuarioLog::newLog("Criada a nota ".$nota->id." para o aluno '".$nota->aluno->pessoa->nome." ".$nota->aluno->pessoa->sobrenome."' referente a disciplina '".$nota->disciplina->nome."'.", $usuario->id);
+            
+            $this->layout->error = View::make('default.acao')
+                ->with('titulo', 'Sucesso!')
+                ->with('tipo', 'alert-success')
+                ->with('msg','Nota salva com sucesso!');
             return $this->notas($id);
         }
         $disciplinasAluno = [];

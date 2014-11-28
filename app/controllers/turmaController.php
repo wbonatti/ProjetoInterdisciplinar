@@ -40,7 +40,7 @@ Class turmaController extends \BaseController
                 'nome' => '',
                 'turno' => ''
             ];
-            UsuarioLog::newLog("Criada função ".$turma->id.": ".$turma->nome.".", $usuario->id);
+            UsuarioLog::newLog("Criada turma ".$turma->id.": ".$turma->nome.".", $usuario->id);
             $success = true;
         }
         $this->layout->content = View::make('turma.novo')

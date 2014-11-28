@@ -51,7 +51,7 @@ Class financeiroController extends \BaseController
         }
         $usuario = Autenticacao::UsuarioLogadoObject();
         $funcionario = Funcionario::find($pgtoFunc->funcionario_id);
-        UsuarioLog::newLog("Deletado o pagamento de salário ".$pgtoFunc->id." no valor de ".$pgtoFunc->valor." referente ao aluno ".$funcionario->id." - ".$funcionario->pessoa->nome, $usuario->id);
+        UsuarioLog::newLog("Deletado o pagamento de salário ".$pgtoFunc->id." no valor de ".$pgtoFunc->valor." referente ao funcionario ".$funcionario->id." - ".$funcionario->pessoa->nome, $usuario->id);
         $financeiro = Financeiro::find($pgtoFunc->financeiro_id);
         $financeiro->delete();
         $this->index();
@@ -92,6 +92,8 @@ Class financeiroController extends \BaseController
         $pgtoSalario->financeiro_id = $financeiro->id;
         $pgtoSalario->funcionario_id = $funcionario->id;
         $pgtoSalario->save();
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        UsuarioLog::newLog("Criado pagamento de salário ".$pgtoSalario->id." no valor de ".$pgtoSalario->valor." referente ao funcionario ".$pgtoSalario->funcionario->id." - ".$pgtoSalario->funcionario->pessoa->nome." ".$pgtoSalario->funcionario->pessoa->sobrenome, $usuario->id);
         
         $funcionarios = Funcionario::all();
         $arrfuncionario = [];
@@ -137,7 +139,7 @@ Class financeiroController extends \BaseController
         }
         $usuario = Autenticacao::UsuarioLogadoObject();
         $aluno = Aluno::find($pgtoAluno->aluno_id);
-        UsuarioLog::newLog("Deletado o pagamento de mensalidade ".$pgtoAluno->id." no valor de ".$pgtoAluno->valor." referente ao funcionário ".$aluno->id." - ".$aluno->pessoa->nome, $usuario->id);
+        UsuarioLog::newLog("Deletado o pagamento de mensalidade ".$pgtoAluno->id." no valor de ".$pgtoAluno->valor." referente ao aluno ".$aluno->id." - ".$aluno->pessoa->nome, $usuario->id);
         $financeiro = Financeiro::find($pgtoAluno->financeiro_id);
         $financeiro->delete();
         $this->index();
@@ -183,6 +185,9 @@ Class financeiroController extends \BaseController
         $pgtoSalario->financeiro_id = $financeiro->id;
         $pgtoSalario->aluno_id = $aluno->id;
         $pgtoSalario->save();
+        $usuario = Autenticacao::UsuarioLogadoObject();
+        UsuarioLog::newLog("Criado pagamento de mensalidade ".$pgtoSalario->id." no valor de ".$pgtoSalario->valor." referente ao funcionario ".$pgtoSalario->aluno->id." - ".$pgtoSalario->aluno->pessoa->nome." ".$pgtoSalario->aluno->pessoa->sobrenome, $usuario->id);
+        
         
         $alunos = Aluno::all();
         $arralunos = [];
