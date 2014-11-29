@@ -22,6 +22,13 @@ class Pessoa extends BaseModel {
     }
     
     public static function getRules(){
+        Validator::extend('validYear', function($attribute, $value, $parameters)
+        {
+            $dt = Carbon\Carbon::createFromFormat('d/m/Y', $value);
+            $now = Carbon\Carbon::now();
+            return $dt->timestamp < $now->timestamp;
+            
+        },'Data de nascimento deve ser menor que data atual.');
         return [
             'nome' => [
                 'required'
@@ -31,7 +38,8 @@ class Pessoa extends BaseModel {
             ],
             'datanascimento' => [
                 'required',
-                'date_format:"d/m/Y"'
+                'date_format:"d/m/Y"',
+                'validYear'
             ]
         ];
     }

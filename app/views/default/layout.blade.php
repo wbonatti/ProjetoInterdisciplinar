@@ -109,6 +109,12 @@ if (!isset($title))
             $('#rg').mask("999999999", {placeholder: "000000000"})
             $(".nota").mask("999");
             $('#data, #nascimento, #datanascimento').mask("99/99/9999", {placeholder: "00/00/0000"})
+            $('input[type="text"]').on('keydown',function(){
+                if(event.keyCode === 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
                 
         </script>
     </body>

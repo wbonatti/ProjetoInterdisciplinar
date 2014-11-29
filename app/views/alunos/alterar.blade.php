@@ -52,7 +52,7 @@
                                         </div> <!-- /control-group -->
                                         
                                         <div class="control-group">
-                                            {{Form::label('nascimento','Data de nascimento:', ['class'=>'control-label'])}}
+                                            {{Form::label('datanascimento','Data de nascimento:', ['class'=>'control-label'])}}
                                             <div class="controls">
                                                 {{Form::text('datanascimento',$dados['datanascimento'], ['autocomplete'=>'off', 'class'=>'span4'])}}
                                                 <p class="text-danger">{{ $errors->first('datanascimento'); }}</p>
