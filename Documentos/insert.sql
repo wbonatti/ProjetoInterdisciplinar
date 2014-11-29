@@ -34,9 +34,6 @@ INSERT INTO pessoa VALUES(8,'Aluno 4', 'aluno 4', '1990/05/07');
 INSERT INTO pessoa VALUES(9,'Responsavel 1', 'Teste', '1990/05/07');
 INSERT INTO pessoa VALUES(10,'Responsavel 2', 'Teste', '1990/05/07');
 
-##INSERT TABLE CONTATO
-INSERT INTO contato VALUES(1, 'celular', '41 9920-4710', 1);
-INSERT INTO contato VALUES(2, 'residencial', '41 36980013', 1);
 
 ##INSERT TABLE FUNCIONARIO
 INSERT INTO funcionario VALUES(1,'08039056969','97618410',0,1,1);

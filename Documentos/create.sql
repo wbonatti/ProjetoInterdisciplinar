@@ -205,26 +205,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Intranet`.`contato`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Intranet`.`contato` ;
-
-CREATE TABLE IF NOT EXISTS `Intranet`.`contato` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(128) NULL,
-  `numero` VARCHAR(128) NULL,
-  `pessoa_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_contato_pessoa1_idx` (`pessoa_id` ASC),
-  CONSTRAINT `fk_contato_pessoa1`
-    FOREIGN KEY (`pessoa_id`)
-    REFERENCES `Intranet`.`pessoa` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `Intranet`.`aluno_disciplina`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Intranet`.`aluno_disciplina` ;
